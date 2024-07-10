@@ -7,8 +7,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-
-func Router(conn *grpc.ClientConn)*gin.Engine{
+func Router(conn *grpc.ClientConn) *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo(conn)
 
