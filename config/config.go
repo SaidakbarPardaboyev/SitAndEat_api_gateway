@@ -21,7 +21,7 @@ type Config struct {
 	SIGNING_KEY         string
 }
 
-func Load() Config {
+func Load() *Config {
 	if err := godotenv.Load(".env"); err != nil {
 		log.Print("No .env file found")
 	}
@@ -38,7 +38,7 @@ func Load() Config {
 	config.RESERVATION_SERVICE = cast.ToString(Coalesce("RESERVATION_SERVICE", "50051"))
 	config.SIGNING_KEY = cast.ToString(Coalesce("SIGNING_KEY", "secret"))
 
-	return config
+	return &config
 }
 
 func Coalesce(key string, defaultValue interface{}) interface{} {

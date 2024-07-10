@@ -1,13 +1,13 @@
 package handler
 
 import (
+	"api_gateway/config"
 	"api_gateway/genproto/menu"
 	"api_gateway/genproto/payment"
 	"api_gateway/genproto/resirvation"
 	"api_gateway/genproto/restaurant"
 	"api_gateway/genproto/users"
-
-	"google.golang.org/grpc"
+	"api_gateway/pkg"
 )
 
 type Handler struct {
@@ -18,12 +18,13 @@ type Handler struct {
 	RestaurantClient  restaurant.RestaurantClient
 }
 
-func NewHandlerRepo(Conn *grpc.ClientConn) *Handler {
+func NewHandlerRepo() *Handler {
+	cfg := config.Load()
 	return &Handler{
-		UserClient:        users.NewUsersClient(Conn),
-		MenuClient:        menu.NewMenuClient(Conn),
-		PaymentClient:     payment.NewPaymentClient(Conn),
-		ReservationClient: resirvation.NewResirvationClient(Conn),
-		RestaurantClient:  restaurant.NewRestaurantClient(Conn),
+		UserClient:        pkg.NewUsersClient(&cfg),
+		MenuClient:        pkg.NewMenuClient(&cfg),
+		PaymentClient:     pkg.NewPaymentClient(&cfg),
+		ReservationClient: pkg.NewReservationClient(&cfg),
+		RestaurantClient:  pkg.NewRestaurantClient(&cfg),
 	}
 }
