@@ -2,15 +2,13 @@ package api
 
 import (
 	"api_gateway/api/handler"
-	"api_gateway/config"
 
 	"github.com/gin-gonic/gin"
-	"google.golang.org/grpc"
 )
 
-func Router(conn *grpc.ClientConn) *gin.Engine {
+func Router() *gin.Engine {
 	router := gin.Default()
-	h := handler.NewHandlerRepo(config.Load())
+	h := handler.NewHandlerRepo()
 
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfile)

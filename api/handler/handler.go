@@ -18,12 +18,13 @@ type Handler struct {
 	RestaurantClient  restaurant.RestaurantClient
 }
 
-func NewHandlerRepo(cfg *config.Config) *Handler {
+func NewHandlerRepo() *Handler {
+	cfg := config.Load()
 	return &Handler{
-		UserClient:        pkg.NewUsersClient(cfg),
-		MenuClient:        pkg.NewMenuClient(cfg),
-		PaymentClient:     pkg.NewPaymentClient(cfg),
-		ReservationClient: pkg.NewReservationClient(cfg),
-		RestaurantClient:  pkg.NewRestaurantClient(cfg),
+		UserClient:        pkg.NewUsersClient(&cfg),
+		MenuClient:        pkg.NewMenuClient(&cfg),
+		PaymentClient:     pkg.NewPaymentClient(&cfg),
+		ReservationClient: pkg.NewReservationClient(&cfg),
+		RestaurantClient:  pkg.NewRestaurantClient(&cfg),
 	}
 }
