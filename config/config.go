@@ -10,7 +10,6 @@ import (
 
 type Config struct {
 	USER_SERVICE        string
-	USER_ROUTER         string
 	RESERVATION_SERVICE string
 	PAYMENT_SERVICE     string
 	API_GATEWAY         string
@@ -33,7 +32,10 @@ func Load() Config {
 	config.DB_USER = cast.ToString(Coalesce("DB_USER", "postgres"))
 	config.DB_PASSWORD = cast.ToString(Coalesce("DB_PASSWORD", "hamidjon4424"))
 	config.DB_NAME = cast.ToString(Coalesce("DB_NAME", "resuserservice"))
-	config.HTTP_PORT = cast.ToString(Coalesce("HTTP_PORT", "50051"))
+	config.API_GATEWAY = cast.ToString(Coalesce("API_GATEWAY", "50051"))
+	config.USER_SERVICE = cast.ToString(Coalesce("USER_SERVICE", "50051"))
+	config.PAYMENT_SERVICE = cast.ToString(Coalesce("PAYMENT_SERVICE", "50051"))
+	config.RESERVATION_SERVICE = cast.ToString(Coalesce("RESERVATION_SERVICE", "50051"))
 	config.SIGNING_KEY = cast.ToString(Coalesce("SIGNING_KEY", "secret"))
 
 	return config
