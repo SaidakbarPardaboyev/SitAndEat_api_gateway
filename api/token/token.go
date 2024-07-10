@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/golang-jwt/jwt"
-	"honnef.co/go/tools/config"
+	"api_gateway/config"
 )
 
 func ValidateToken(tokenstr string) (bool, error) {
