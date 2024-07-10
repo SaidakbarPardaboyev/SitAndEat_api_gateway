@@ -5,6 +5,8 @@ go 1.22.4
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/joho/godotenv v1.5.1
+	github.com/spf13/cast v1.6.0
 	honnef.co/go/tools v0.4.7
 )
 
