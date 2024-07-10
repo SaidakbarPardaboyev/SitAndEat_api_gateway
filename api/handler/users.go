@@ -4,11 +4,18 @@ import (
 	"api_gateway/genproto/users"
 	"net/http"
 
+<<<<<<< HEAD
 	"github.com/golang-jwt/jwt"
 	_ "github.com/swaggo/swag"
 
 	"github.com/gin-gonic/gin"
 )
+=======
+	"github.com/gin-gonic/gin"
+)
+
+func (h *Handler) GetProfile(c *gin.Context) {
+>>>>>>> origin/Azizbek
 
 // @Summary Get Profile
 // @Description Get Profile
@@ -43,6 +50,7 @@ func (h *Handler) GetProfileById(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
+<<<<<<< HEAD
 // @Summary Update Profile
 // @Description Update Profile
 // @Tags users
@@ -56,6 +64,11 @@ func (h *Handler) GetProfileById(c *gin.Context) {
 func (h *Handler) UpdateProfile(c *gin.Context) {
 	req := users.UpdateProf{}
 
+=======
+func (h *Handler) UpdateProfile(c *gin.Context) {
+	req := users.UpdateProf{}
+
+>>>>>>> origin/Azizbek
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -68,6 +81,7 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 	})
 }
 
+<<<<<<< HEAD
 // @Summary Delete Profile
 // @Description Delete Profile
 // @Tags users
@@ -91,4 +105,8 @@ func (h *Handler) DeleteProfile(c *gin.Context) {
 		"message": "Profile deleted successfully!",
 	})
 
+=======
+func (h *Handler) DeleteProfile(c *gin.Context) {
+
+>>>>>>> origin/Azizbek
 }
