@@ -10,7 +10,7 @@ import (
 
 // @Summary User profile ni ko'rsatish
 // @Description Profile malumotlarini olish
-// @ID User
+// @Tags User
 // @Produce json
 // @Success 200 {object} user.GetUser "Ok"
 // @Failure 400 {object} map[string]string "Bad Request"
