@@ -10,21 +10,20 @@ import (
 	"google.golang.org/grpc"
 )
 
-
-type Handler struct{
-	users.UsersClient
-	menu.MenuClient
-	payment.PaymentClient
-	resirvation.ResirvationClient
-	restaurant.RestaurantClient
+type Handler struct {
+	UserClient        users.UsersClient
+	MenuClient        menu.MenuClient
+	PaymentClient     payment.PaymentClient
+	ReservationClient resirvation.ResirvationClient
+	RestaurantClient  restaurant.RestaurantClient
 }
 
-func NewHandlerRepo(Conn *grpc.ClientConn)*Handler{
+func NewHandlerRepo(Conn *grpc.ClientConn) *Handler {
 	return &Handler{
-		users.NewUsersClient(Conn),
-		menu.NewMenuClient(Conn),
-		payment.NewPaymentClient(Conn),
-		resirvation.NewResirvationClient(Conn),
-		restaurant.NewRestaurantClient(Conn),	
+		UserClient:        users.NewUsersClient(Conn),
+		MenuClient:        menu.NewMenuClient(Conn),
+		PaymentClient:     payment.NewPaymentClient(Conn),
+		ReservationClient: resirvation.NewResirvationClient(Conn),
+		RestaurantClient:  restaurant.NewRestaurantClient(Conn),
 	}
 }

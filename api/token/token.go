@@ -1,10 +1,12 @@
 package token
 
 import (
+	"api_gateway/config"
 	"fmt"
 
-	"github.com/golang-jwt/jwt"
 	"api_gateway/config"
+
+	"github.com/golang-jwt/jwt"
 )
 
 func ValidateToken(tokenstr string) (bool, error) {
