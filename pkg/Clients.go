@@ -5,6 +5,7 @@ import (
 	presirvation "api_gateway/genproto/resirvation"
 	pmenu "api_gateway/genproto/menu"
 	prestaurant "api_gateway/genproto/restaurant"
+	user "api_gateway/genproto/users"
 	"api_gateway/config"
 	"log"
 
@@ -42,4 +43,12 @@ func NewMenuClient(cfg *config.Config) pmenu.MenuClient {
 		log.Fatal(err)
 	}
 	return pmenu.NewMenuClient(conn)
+}
+
+func NewUsersClient(cfg *config.Config) user.UsersClient {
+	conn, err := grpc.NewClient(cfg.USER_SERVICE, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return user.NewUsersClient(conn)
 }
