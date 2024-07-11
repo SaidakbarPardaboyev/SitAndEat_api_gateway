@@ -18,7 +18,7 @@ import (
 // @Param reservation body resirvation.RequestReservations true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation [post]
+// @Router /reservation/createReservation [post]
 func (h *Handler) CreateReservation(c *gin.Context) {
 	req := pb.RequestReservations{}
 	err := c.ShouldBindJSON(&req)
@@ -45,7 +45,7 @@ func (h *Handler) CreateReservation(c *gin.Context) {
 // @Param reservation body resirvation.ReservationId true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Reservation
 // @Failure 400 {object} models.Error
-// @Router /reservation [get]
+// @Router /reservation/getReservation/:id [get]
 func (h *Handler) GetReservation(c *gin.Context) {
 	id := c.Param("id")
 	req := pb.ReservationId{Id: id}
@@ -67,7 +67,7 @@ func (h *Handler) GetReservation(c *gin.Context) {
 // @Param reservation body resirvation.Filter true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
-// @Router /reservation [get]
+// @Router /reservation/getAllReservations [get]
 func (h *Handler) GetAllReservation(c *gin.Context) {
 	query := `
 			SELECT 
@@ -163,7 +163,7 @@ func (h *Handler) GetAllReservation(c *gin.Context) {
 // @Param reservation body resirvation.ReservationUpdate true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation [put]
+// @Router /reservation/updateReservation [put]
 func (h *Handler) UpdateReservations(c *gin.Context) {
 	req := pb.ReservationUpdate{}
 	err := c.ShouldBindJSON(&req)
@@ -190,7 +190,7 @@ func (h *Handler) UpdateReservations(c *gin.Context) {
 // @Param reservation body resirvation.ReservationId true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation [delete]
+// @Router /reservation/deleteReservation/:id [delete]
 func (h *Handler) DeleteReservation(c *gin.Context) {
 	req := pb.ReservationId{
 		Id: c.Param("id"),
@@ -213,7 +213,7 @@ func (h *Handler) DeleteReservation(c *gin.Context) {
 // @Param reservation body resirvation.UserId true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
-// @Router /reservation [get]
+// @Router /reservation/getUserReservation/:id [get]
 func (h *Handler) GetReservationsByUserId(c *gin.Context) {
 	req := pb.UserId{
 		Id: c.Param("userId"),
@@ -236,7 +236,7 @@ func (h *Handler) GetReservationsByUserId(c *gin.Context) {
 // @Param reservation body resirvation.Order true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation [post]
+// @Router /reservation/orderMeal [post]
 func (h *Handler) OrderMeal(c *gin.Context) {
 	req := pb.Order{}
 	err := c.ShouldBindJSON(&req)
@@ -263,7 +263,7 @@ func (h *Handler) OrderMeal(c *gin.Context) {
 // @Param reservation body resirvation.Payment true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation [post]
+// @Router /reservation/payForReservation [post]
 func (h *Handler) PayForReservation(c *gin.Context) {
 	req := pb.Payment{}
 	err := c.ShouldBindJSON(&req)

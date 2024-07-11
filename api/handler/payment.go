@@ -16,7 +16,7 @@ import (
 // @Param request body payment.CreatePayment true "Create Payment Request"
 // @Success 200 {object} payment.Status
 // @Failure 400 {object} models.Error
-// @Router /payments [post]
+// @Router /payments/createPayment [post]
 func (h *Handler) CreatePayments(c *gin.Context) {
 	req := pb.CreatePayment{}
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -43,10 +43,10 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 // @Tags payments
 // @Accept  json
 // @Produce  json
-// @Param request body payment.GetById true "Get Payment By ID Request"
+// @Param request path payment.GetById true "Get Payment By ID Request"
 // @Success 200 {object} payment.GetByIdResponse
 // @Failure 400 {object} models.Error
-// @Router /payments/status [get]
+// @Router /payments/getPaymentStatus/:id [get]
 func (h *Handler) GetPaymentStatusById(c *gin.Context) {
 	req := pb.GetById{
 		Id: c.Param("id"),
@@ -71,7 +71,7 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context) {
 // @Param request body payment.UpdatePayment true "Update Payment Request"
 // @Success 200 {object} payment.Status
 // @Failure 400 {object} models.Error
-// @Router /payments [put]
+// @Router /payments/updatePayment [put]
 func (h *Handler) UpdatePayments(c *gin.Context) {
 	req := pb.UpdatePayment{}
 	if err := c.ShouldBindJSON(&req); err != nil {
