@@ -4,8 +4,6 @@ import (
 	"api_gateway/config"
 	"fmt"
 
-	"api_gateway/config"
-
 	"github.com/golang-jwt/jwt"
 )
 
