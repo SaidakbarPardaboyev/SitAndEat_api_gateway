@@ -18,7 +18,7 @@ import (
 // @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.GetRes
 // @Failure 400 {object} models.Error
-// @Router /restaurant [get]
+// @Router /restaurant/getRestaurant/:id [get]
 func (h *Handler) GetRestaurant(c *gin.Context) {
 	req := pb.RestuanantId{
 		Id: c.Param("id"),
@@ -41,7 +41,7 @@ func (h *Handler) GetRestaurant(c *gin.Context) {
 // @Param restaurant body restaurant.RestuarantUpdate true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
-// @Router /restaurant [put]
+// @Router /restaurant/updateRestaurant [put]
 func (h *Handler) UpdateRestaurant(c *gin.Context) {
 	req := pb.RestuarantUpdate{}
 	err := c.ShouldBindJSON(&req)
@@ -68,7 +68,7 @@ func (h *Handler) UpdateRestaurant(c *gin.Context) {
 // @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
-// @Router /restaurant [delete]
+// @Router /restaurant/deleteRestaurant/:id [delete]
 func (h *Handler) DeleteRestaurant(c *gin.Context) {
 	req := pb.RestuanantId{
 		Id: c.Param("id"),
@@ -91,7 +91,7 @@ func (h *Handler) DeleteRestaurant(c *gin.Context) {
 // @Param restaurant body restaurant.Restuarant true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
-// @Router /restaurant [post]
+// @Router /restaurant/createRestaurant [post]
 func (h *Handler) CreateRestaurant(c *gin.Context) {
 	req := pb.Restuarant{}
 	err := c.ShouldBindJSON(&req)
@@ -118,7 +118,7 @@ func (h *Handler) CreateRestaurant(c *gin.Context) {
 // @Param restaurant body restaurant.Filter true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Restuanants
 // @Failure 400 {object} models.Error
-// @Router /restaurant [get]
+// @Router /restaurant/getAllRestaurant [get]
 func (h *Handler) GetAllRestaurants(c *gin.Context) {
 	query := `
 				SELECT 

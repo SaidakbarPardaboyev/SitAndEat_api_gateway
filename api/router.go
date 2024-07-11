@@ -6,13 +6,15 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "api_gateway/api/docs"
+	
 )
 
 
 // @title Auth Service API
 // @version 1.0
 // @description This is a sample server for Auth Service.
-// @host localhost:8081
+// @host localhost:4444
 // @schemes http
 func NewRouter() *gin.Engine {
 	router := gin.Default()
@@ -50,7 +52,7 @@ func NewRouter() *gin.Engine {
 	menu.PUT("/updateFood", h.UpdateFood)
 	menu.DELETE("/deleteFood/:id", h.DeleteFood)
 
-	payment := router.Group("/payment")
+	payment := router.Group("/payments")
 	payment.POST("/createPayment", h.CreatePayments)
 	payment.GET("/getPaymentStatus/:id", h.GetPaymentStatusById)
 	payment.PUT("/updatePayment", h.UpdatePayments)
