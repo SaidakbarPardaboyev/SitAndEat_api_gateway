@@ -63,6 +63,14 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 		return
 	}
 
+	
+	_, err := h.UserClient.UpdateProfile(c, &req)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Profile updated successfully!",
 	})
@@ -87,8 +95,18 @@ func (h *Handler) DeleteProfile(c *gin.Context) {
 		})
 		return
 	}
+	id := c.Param("id")
+	req.UserId = id
+	
+	_, err := h.UserClient.DeleteProfile(c, &req)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Profile deleted successfully!",
 	})
-
 }

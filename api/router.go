@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Router() *gin.Engine {
+func NewRouter() *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo()
 

@@ -22,16 +22,16 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 	req := pb.CreatePayment{}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
+			"error": err.Error(),
 		})
 		log.Fatalf("Create payment error: %v", err)
 		return
 	}
 
-	resp,err:=h.PaymentClient.CreatePayments(context.Background(), &req)
-	if err != nil{
+	resp, err := h.PaymentClient.CreatePayments(context.Background(), &req)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
+			"error": err.Error(),
 		})
 		log.Fatalf("Create payment request error: %v", err)
 		return
@@ -48,24 +48,24 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 // @Success 200 {object} pb.GetByIdResponse
 // @Failure 400 {object} gin.H{"error": "string"}
 // @Router /payments/status [get]
-func (h *Handler) GetPaymentStatusById(c *gin.Context){
-	req:=pb.GetById{}
+func (h *Handler) GetPaymentStatusById(c *gin.Context) {
+	req := pb.GetById{}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
+			"error": err.Error(),
 		})
 		log.Fatalf("GetbyId payment error: %v", err)
 		return
 	}
 
-	resp,err:=h.PaymentClient.GetPaymentStatusById(context.Background(), &req)
-	if err!=nil{
-		c.JSON(500,gin.H{
-			"error":err.Error(),
+	resp, err := h.PaymentClient.GetPaymentStatusById(context.Background(), &req)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"error": err.Error(),
 		})
 	}
 
-	c.JSON(200,resp)
+	c.JSON(200, resp)
 }
 
 // @Summary Update a payment
@@ -77,19 +77,19 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context){
 // @Success 200 {object} pb.Status
 // @Failure 400 {object} gin.H{"error": "string"}
 // @Router /payments [put]
-func (h *Handler) UpdatePayments(c *gin.Context){
-	req:=pb.UpdatePayment{}
-	if err:=c.ShouldBindJSON(&req);err!=nil{
-		c.JSON(400,gin.H{
-			"error":err.Error(),
+func (h *Handler) UpdatePayments(c *gin.Context) {
+	req := pb.UpdatePayment{}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
 		})
 	}
 
-	resp,err:=h.PaymentClient.UpdatePayments(context.Background(), &req)
-	if err!=nil{
-		c.JSON(500,gin.H{
-			"error":err.Error(),
+	resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"error": err.Error(),
 		})
 	}
-	c.JSON(200,resp)
+	c.JSON(200, resp)
 }
