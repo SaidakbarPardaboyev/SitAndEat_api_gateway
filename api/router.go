@@ -6,13 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "api_gateway/docs"
 )
 
 
 // @title Auth Service API
 // @version 1.0
 // @description This is a sample server for Auth Service.
-// @host localhost:8081
+// @host localhost:4444
 // @schemes http
 func NewRouter() *gin.Engine {
 	router := gin.Default()
