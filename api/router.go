@@ -11,7 +11,7 @@ func Router() *gin.Engine {
 	h := handler.NewHandlerRepo()
 
 	users := router.Group("/users")
-	users.GET("/getProfile/:id", h.GetProfile)
+	users.GET("/getProfile/:id", h.GetProfileById)
 	users.PUT("/updateProfile", h.UpdateProfile)
 	users.DELETE("/deleteProfile", h.DeleteProfile)
 
