@@ -8,23 +8,18 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title API Gateway
+
+// @title Auth Service API
 // @version 1.0
-// @description Bu API Gatewayning Swagger hujjatlari
-// @termsOfService http://swagger.io/terms/
-
-// @contact.name API Support
-// @contact.url http://www.swagger.io/support
-// @contact.email support@swagger.io
-
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-
-// @host localhost:8080
-// @BasePath /
+// @description This is a sample server for Auth Service.
+// @host localhost:8081
+// @schemes http
 func NewRouter() *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo()
+
+	// Swagger endpointini sozlash
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfileById)

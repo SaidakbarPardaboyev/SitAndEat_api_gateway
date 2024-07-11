@@ -5,10 +5,9 @@ import (
 	"api_gateway/config"
 )
 
-
 func main() {
 
 	r := api.NewRouter()
-	
 	r.Run(config.Load().API_GATEWAY)
+
 }

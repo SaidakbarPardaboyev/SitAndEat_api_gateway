@@ -3,7 +3,6 @@ package handler
 import (
 	pb "api_gateway/genproto/payment"
 	"context"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,17 +13,17 @@ import (
 // @Tags payments
 // @Accept  json
 // @Produce  json
-// @Param request body pb.CreatePayment true "Create Payment Request"
-// @Success 200 {object} pb.Status
-// @Failure 400 {object} gin.H{"error": "string"}
+// @Param request body payment.CreatePayment true "Create Payment Request"
+// @Success 200 {object} payment.Status
+// @Failure 400 {object} models.Error
 // @Router /payments [post]
 func (h *Handler) CreatePayments(c *gin.Context) {
 	req := pb.CreatePayment{}
 	if err := c.ShouldBindJSON(&req); err != nil {
+		h.Logger.Error("Create payment error: %v", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":err.Error(),
 		})
-		log.Fatalf("Create payment error: %v", err)
 		return
 	}
 
@@ -33,7 +32,7 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":err.Error(),
 		})
-		log.Fatalf("Create payment request error: %v", err)
+		h.Logger.Error("Create payment request error: %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
@@ -44,24 +43,20 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 // @Tags payments
 // @Accept  json
 // @Produce  json
-// @Param request body pb.GetById true "Get Payment By ID Request"
-// @Success 200 {object} pb.GetByIdResponse
-// @Failure 400 {object} gin.H{"error": "string"}
+// @Param request body payment.GetById true "Get Payment By ID Request"
+// @Success 200 {object} payment.GetByIdResponse
+// @Failure 400 {object} models.Error
 // @Router /payments/status [get]
-func (h *Handler) GetPaymentStatusById(c *gin.Context){
-	req:=pb.GetById{}
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
-		})
-		log.Fatalf("GetbyId payment error: %v", err)
-		return
+func (h *Handler) GetPaymentStatusById(c *gin.Context) {
+	req := pb.GetById{
+		Id: c.Param("id"),
 	}
 
-	resp,err:=h.PaymentClient.GetPaymentStatusById(context.Background(), &req)
-	if err!=nil{
-		c.JSON(500,gin.H{
-			"error":err.Error(),
+	resp, err := h.PaymentClient.GetPaymentStatusById(context.Background(), &req)
+	if err != nil {
+		h.Logger.Error("GetPaymentStatusById request error: %v", err)
+		c.JSON(500, gin.H{
+			"error": err.Error(),
 		})
 	}
 
@@ -73,22 +68,24 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context){
 // @Tags payments
 // @Accept  json
 // @Produce  json
-// @Param request body pb.UpdatePayment true "Update Payment Request"
-// @Success 200 {object} pb.Status
-// @Failure 400 {object} gin.H{"error": "string"}
+// @Param request body payment.UpdatePayment true "Update Payment Request"
+// @Success 200 {object} payment.Status
+// @Failure 400 {object} models.Error
 // @Router /payments [put]
-func (h *Handler) UpdatePayments(c *gin.Context){
-	req:=pb.UpdatePayment{}
-	if err:=c.ShouldBindJSON(&req);err!=nil{
-		c.JSON(400,gin.H{
-			"error":err.Error(),
+func (h *Handler) UpdatePayments(c *gin.Context) {
+	req := pb.UpdatePayment{}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		h.Logger.Error("UpdatePayments error: %v", err)
+		c.JSON(400, gin.H{
+			"error": err.Error(),
 		})
 	}
 
-	resp,err:=h.PaymentClient.UpdatePayments(context.Background(), &req)
-	if err!=nil{
-		c.JSON(500,gin.H{
-			"error":err.Error(),
+	resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
+	if err != nil {
+		h.Logger.Error("UpdatePayments request error: %v", err)
+		c.JSON(500, gin.H{
+			"error": err.Error(),
 		})
 	}
 	c.JSON(200,resp)

@@ -3,7 +3,6 @@ package handler
 import (
 	pb "api_gateway/genproto/restaurant"
 	"context"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -13,13 +12,13 @@ import (
 
 // @Summary restaurant olish
 // @Description Id bilan restaurant olinyapti
-// @Tags restaurantlar
+// @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body pb.RestuanantId true "Restaurant so'rovi"
-// @Success 200 {object} pb.RestuanantId
-// @Failure 400 {object} gin.H
-// @Router /restaurant [post]
+// @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
+// @Success 200 {object} restaurant.GetRes
+// @Failure 400 {object} models.Error
+// @Router /restaurant [get]
 func (h *Handler) GetRestaurant(c *gin.Context) {
 	req := pb.RestuanantId{
 		Id: c.Param("id"),
@@ -28,7 +27,7 @@ func (h *Handler) GetRestaurant(c *gin.Context) {
 	resp, err := h.RestaurantClient.GetRestuarant(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("GetRestuarant request error : %v", err)
+		h.Logger.Error("GetRestuarant request error : %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
@@ -36,26 +35,26 @@ func (h *Handler) GetRestaurant(c *gin.Context) {
 
 // @Summary restaurant yangilash
 // @Description Bodydagi ma'luotlar asosida restaurant yangilanyapti
-// @Tags restaurantlar
+// @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body pb.RestuarantUpdate true "Restaurant so'rovi"
-// @Success 200 {object} pb.RestuarantUpdate
-// @Failure 400 {object} gin.H
-// @Router /restaurant [post]
+// @Param restaurant body restaurant.RestuarantUpdate true "Restaurant so'rovi"
+// @Success 200 {object} restaurant.Status
+// @Failure 400 {object} models.Error
+// @Router /restaurant [put]
 func (h *Handler) UpdateRestaurant(c *gin.Context) {
 	req := pb.RestuarantUpdate{}
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("Update restaurant error : %v", err)
+		h.Logger.Error("Update restaurant error : %v", err)
 		return
 	}
 
 	resp, err := h.RestaurantClient.UpdateRestuarant(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("UpdateRestaurant request error : %v", err)
+		h.Logger.Error("UpdateRestaurant request error : %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
@@ -63,13 +62,13 @@ func (h *Handler) UpdateRestaurant(c *gin.Context) {
 
 // @Summary restaurant o'chirish
 // @Description Id orqali restaurant o'chirilmoqda
-// @Tags restaurantlar
+// @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body pb.RestuanantId true "Restaurant so'rovi"
-// @Success 200 {object} pb.RestuanantId
-// @Failure 400 {object} gin.H
-// @Router /restaurant [post]
+// @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
+// @Success 200 {object} restaurant.Status
+// @Failure 400 {object} models.Error
+// @Router /restaurant [delete]
 func (h *Handler) DeleteRestaurant(c *gin.Context) {
 	req := pb.RestuanantId{
 		Id: c.Param("id"),
@@ -78,7 +77,7 @@ func (h *Handler) DeleteRestaurant(c *gin.Context) {
 	resp, err := h.RestaurantClient.DeleteRestuarant(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("DeleteRestuarant request error : %v", err)
+		h.Logger.Error("DeleteRestuarant request error : %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
@@ -86,40 +85,40 @@ func (h *Handler) DeleteRestaurant(c *gin.Context) {
 
 // @Summary restaurant yaratish
 // @Description Bodydagi ma'luotlar asosida restaurant yaratilyapti
-// @Tags restaurantlar
+// @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body pb.Restuarant true "Restaurant so'rovi"
-// @Success 200 {object} pb.Restuarant
-// @Failure 400 {object} gin.H
+// @Param restaurant body restaurant.Restuarant true "Restaurant so'rovi"
+// @Success 200 {object} restaurant.Status
+// @Failure 400 {object} models.Error
 // @Router /restaurant [post]
 func (h *Handler) CreateRestaurant(c *gin.Context) {
 	req := pb.Restuarant{}
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("CreateRestaurant  error : %v", err)
+		h.Logger.Error("CreateRestaurant  error : %v", err)
 		return
 	}
 
 	resp, err := h.RestaurantClient.CreateRestaurant(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("CreateRestaurant request error : %v", err)
+		h.Logger.Error("CreateRestaurant request error : %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Summary Barcha restaurantlarni olish
+// @Summary Barcha restaurantni olish
 // @Description Istalgancha restaurantni filterlab olish mumkin
-// @Tags restaurantlar
+// @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body pb.GetRes true "Restaurant so'rovi"
-// @Success 200 {object} pb.GetRes
-// @Failure 400 {object} gin.H
-// @Router /restaurant [post]
+// @Param restaurant body restaurant.Filter true "Restaurant so'rovi"
+// @Success 200 {object} restaurant.Restuanants
+// @Failure 400 {object} models.Error
+// @Router /restaurant [get]
 func (h *Handler) GetAllRestaurants(c *gin.Context) {
 	query := `
 				SELECT 
@@ -200,7 +199,7 @@ func (h *Handler) GetAllRestaurants(c *gin.Context) {
 	resp, err := h.RestaurantClient.GetAllRestaurants(context.Background(), &pb.Filter{Query: query, Arr: arr})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		log.Fatalf("GetAll request error: %v", err)
+		h.Logger.Error("GetAll request error: %v", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
