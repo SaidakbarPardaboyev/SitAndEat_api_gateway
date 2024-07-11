@@ -1,0 +1,1 @@
+time=2024-07-11T19:17:17.483+05:00 level=ERROR msg="GetProfile request error: %v" !BADKEY="rpc error: code = Unknown desc = pq: relation \"users\" does not exist"
