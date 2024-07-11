@@ -79,7 +79,7 @@ func (h *Handler) GetFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),
 	}
-	
+
 	resp, err := h.MenuClient.GetFood(context.Background(), req)
 	if err != nil {
 		h.Logger.Error("GetFood request error: %v", err)
@@ -104,7 +104,6 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Router /menu/updateFood [put]
 func (h *Handler) UpdateFood(c *gin.Context) {
 	req := &pb.UpdateF{}
-<<<<<<< HEAD
 	if err := c.ShouldBindJSON(req); err != nil {
 		h.Logger.Error("UpdateFood error: %v")
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -112,8 +111,6 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 		})
 		return
 	}
-=======
->>>>>>> origin/Azizbek
 	resp, err := h.MenuClient.UpdateFood(context.Background(), req)
 	if err != nil {
 		h.Logger.Error("UpdateFood request error: %v")
