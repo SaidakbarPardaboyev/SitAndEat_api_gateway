@@ -76,14 +76,8 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Router /menu/:id [get]
 func (h *Handler) GetFood(c *gin.Context) {
 	req := &pb.FoodId{}
-	if err := c.ShouldBindJSON(req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
-	id := c.Param("id")
-	req.Id = id
+
+	req.Id = c.Param("id")
 	resp, err := h.MenuClient.GetFood(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -106,12 +100,6 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Router /menu/:id [put]
 func (h *Handler) UpdateFood(c *gin.Context) {
 	req := &pb.UpdateF{}
-	if err := c.ShouldBindJSON(req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
 	resp, err := h.MenuClient.UpdateFood(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
