@@ -1,0 +1,798 @@
+definitions:
+  menu.CreateF:
+    properties:
+      description:
+        type: string
+      image:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      price:
+        type: number
+      restuarantId:
+        type: string
+    type: object
+  menu.Food:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      image:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      price:
+        type: number
+      restuarantId:
+        type: string
+      update_at:
+        type: string
+    type: object
+  menu.FoodId:
+    properties:
+      id:
+        type: string
+    type: object
+  menu.Foods:
+    properties:
+      foods:
+        items:
+          $ref: '#/definitions/menu.Food'
+        type: array
+    type: object
+  menu.Status:
+    properties:
+      status:
+        type: boolean
+    type: object
+  menu.UpdateF:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      image:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      price:
+        type: number
+      restuarantId:
+        type: string
+    type: object
+  menu.Void:
+    type: object
+  models.Error:
+    properties:
+      error:
+        type: string
+    type: object
+  payment.CreatePayment:
+    properties:
+      amount:
+        type: number
+      paymentmethod:
+        type: string
+      paymentstatus:
+        type: string
+      reservationId:
+        type: string
+    type: object
+  payment.GetById:
+    properties:
+      id:
+        type: string
+    type: object
+  payment.GetByIdResponse:
+    properties:
+      paymentstatus:
+        type: string
+    type: object
+  payment.Status:
+    properties:
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+  payment.UpdatePayment:
+    properties:
+      amount:
+        type: number
+      id:
+        type: string
+      payment_method:
+        type: string
+      payment_status:
+        type: string
+    type: object
+  resirvation.Filter:
+    properties:
+      arr:
+        items:
+          type: string
+        type: array
+      query:
+        type: string
+    type: object
+  resirvation.Order:
+    properties:
+      menuItemId:
+        type: string
+      quantity:
+        type: integer
+      reservatinId:
+        type: string
+    type: object
+  resirvation.Payment:
+    properties:
+      amount:
+        type: number
+      reservationId:
+        type: string
+    type: object
+  resirvation.RequestReservations:
+    properties:
+      restaurantId:
+        type: string
+      userId:
+        type: string
+    type: object
+  resirvation.Reservation:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      resTime:
+        type: string
+      restuarantId:
+        type: string
+      status:
+        type: string
+      updateAt:
+        type: string
+      userId:
+        type: string
+    type: object
+  resirvation.ReservationId:
+    properties:
+      Id:
+        type: string
+    type: object
+  resirvation.ReservationUpdate:
+    properties:
+      id:
+        type: string
+      restuarantId:
+        type: string
+      status:
+        type: string
+    type: object
+  resirvation.Reservations:
+    properties:
+      reservations:
+        items:
+          $ref: '#/definitions/resirvation.Reservation'
+        type: array
+    type: object
+  resirvation.Status:
+    properties:
+      Status:
+        type: boolean
+    type: object
+  resirvation.UserId:
+    properties:
+      Id:
+        type: string
+    type: object
+  restaurant.Filter:
+    properties:
+      arr:
+        items:
+          type: string
+        type: array
+      query:
+        type: string
+    type: object
+  restaurant.GetRes:
+    properties:
+      address:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  restaurant.RestuanantId:
+    properties:
+      Id:
+        type: string
+    type: object
+  restaurant.Restuanants:
+    properties:
+      restuanants:
+        items:
+          $ref: '#/definitions/restaurant.GetRes'
+        type: array
+    type: object
+  restaurant.Restuarant:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  restaurant.RestuarantUpdate:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  restaurant.Status:
+    properties:
+      Status:
+        type: boolean
+    type: object
+  users.GetUser:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  users.Status:
+    properties:
+      status:
+        type: boolean
+    type: object
+  users.UserId:
+    properties:
+      userId:
+        type: string
+    type: object
+host: localhost:8081
+info:
+  contact: {}
+  description: This is a sample server for Auth Service.
+  title: Auth Service API
+  version: "1.0"
+paths:
+  /menu:
+    get:
+      consumes:
+      - application/json
+      description: get all foods
+      parameters:
+      - description: Get Foods
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.Void'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Foods'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get All foods
+      tags:
+      - menu
+    post:
+      consumes:
+      - application/json
+      description: get menu
+      parameters:
+      - description: Create Food
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.CreateF'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get menu
+      tags:
+      - menu
+  /menu/:id:
+    delete:
+      consumes:
+      - application/json
+      description: delete food
+      parameters:
+      - description: Delete Food
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.FoodId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Delete food
+      tags:
+      - menu
+    get:
+      consumes:
+      - application/json
+      description: get food
+      parameters:
+      - description: Get Food
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.FoodId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Food'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      tags:
+      - menu
+    put:
+      consumes:
+      - application/json
+      description: update food
+      parameters:
+      - description: Update Food
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.UpdateF'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Update food
+      tags:
+      - menu
+  /payments:
+    post:
+      consumes:
+      - application/json
+      description: Create a new payment
+      parameters:
+      - description: Create Payment Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payment.CreatePayment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Create a payment
+      tags:
+      - payments
+    put:
+      consumes:
+      - application/json
+      description: Update an existing payment
+      parameters:
+      - description: Update Payment Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payment.UpdatePayment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Update a payment
+      tags:
+      - payments
+  /payments/status:
+    get:
+      consumes:
+      - application/json
+      description: Get payment status by ID
+      parameters:
+      - description: Get Payment By ID Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payment.GetById'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.GetByIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get payment status by ID
+      tags:
+      - payments
+  /reservation:
+    delete:
+      consumes:
+      - application/json
+      description: reservation id sini paramdan o'qigan holda uni o'chirmoqda
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.ReservationId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: reservationni o'chirish
+      tags:
+      - resirvation
+    get:
+      consumes:
+      - application/json
+      description: user id sini paramdan o'qigan holda uning reservationi olinmoqda
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.UserId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Reservations'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: user reservationni olish
+      tags:
+      - resirvation
+    post:
+      consumes:
+      - application/json
+      description: bodydagi ma'lumotlar asosida to'lob qilinishi kerak
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.Payment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: pay for reservation
+      tags:
+      - resirvation
+    put:
+      consumes:
+      - application/json
+      description: bodydan yangi reservationni olgan holda uni yangilamoqda
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.ReservationUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: reservationni yangilash
+      tags:
+      - resirvation
+  /restaurant:
+    delete:
+      consumes:
+      - application/json
+      description: Id orqali restaurant o'chirilmoqda
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.RestuanantId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: restaurant o'chirish
+      tags:
+      - restaurant
+    get:
+      consumes:
+      - application/json
+      description: Istalgancha restaurantni filterlab olish mumkin
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.Filter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Restuanants'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Barcha restaurantni olish
+      tags:
+      - restaurant
+    post:
+      consumes:
+      - application/json
+      description: Bodydagi ma'luotlar asosida restaurant yaratilyapti
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.Restuarant'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: restaurant yaratish
+      tags:
+      - restaurant
+    put:
+      consumes:
+      - application/json
+      description: Bodydagi ma'luotlar asosida restaurant yangilanyapti
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.RestuarantUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: restaurant yangilash
+      tags:
+      - restaurant
+  /users/deleteProfile/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Profile
+      parameters:
+      - description: Delete Profile
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Delete Profile
+      tags:
+      - users
+  /users/getProfile/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Profile
+      parameters:
+      - description: get Profile
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.GetUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get Profile
+      tags:
+      - users
+schemes:
+- http
+swagger: "2.0"

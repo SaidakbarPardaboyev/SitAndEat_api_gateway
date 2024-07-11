@@ -13,14 +13,16 @@ import (
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// @Param request body menu.CreateF true "Create Food"
+// @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu [get]
+// @Router /menu [post]
 func (h *Handler) CreateFood(c *gin.Context) {
 	req := &pb.CreateF{}
 	if err := c.ShouldBindJSON(req); err != nil {
+		h.Logger.Error("CreateFood error: %v", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
@@ -28,6 +30,7 @@ func (h *Handler) CreateFood(c *gin.Context) {
 	}
 	resp, err := h.MenuClient.CreateFood(context.Background(), req)
 	if err != nil {
+		h.Logger.Error("CreateFood request error: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -41,21 +44,18 @@ func (h *Handler) CreateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// @Param request body menu.Void true "Get Foods"
+// @Success 200 {object} menu.Foods
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
 // @Router /menu [get]
 func (h *Handler) GetAllFoods(c *gin.Context) {
 	req := &pb.Void{}
-	if err := c.ShouldBindJSON(req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
+
 	resp, err := h.MenuClient.GetAllFoods(context.Background(), req)
 	if err != nil {
+		h.Logger.Error("GetAllFoods request error: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -69,23 +69,20 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// @Param request body menu.FoodId true "Get Food"
+// @Success 200 {object} menu.Food
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
 // @Router /menu/:id [get]
 func (h *Handler) GetFood(c *gin.Context) {
-	req := &pb.FoodId{}
-	if err := c.ShouldBindJSON(req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
+	req := &pb.FoodId{
+		Id: c.Param("id"),
 	}
-	id := c.Param("id")
-	req.Id = id
+	
 	resp, err := h.MenuClient.GetFood(context.Background(), req)
 	if err != nil {
+		h.Logger.Error("GetFood request error: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -99,7 +96,8 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// @Param request body menu.UpdateF true "Update Food"
+// @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -107,6 +105,7 @@ func (h *Handler) GetFood(c *gin.Context) {
 func (h *Handler) UpdateFood(c *gin.Context) {
 	req := &pb.UpdateF{}
 	if err := c.ShouldBindJSON(req); err != nil {
+		h.Logger.Error("UpdateFood error: %v")
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
@@ -114,6 +113,7 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 	}
 	resp, err := h.MenuClient.UpdateFood(context.Background(), req)
 	if err != nil {
+		h.Logger.Error("UpdateFood request error: %v")
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -127,23 +127,20 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// @Param request body menu.FoodId true "Delete Food"
+// @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
 // @Router /menu/:id [delete]
 func (h *Handler) DeleteFood(c *gin.Context) {
-	req := &pb.FoodId{}
-	if err := c.ShouldBindJSON(req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
+	req := &pb.FoodId{
+		Id: c.Param("id"),
 	}
-	id := c.Param("id")
-	req.Id = id	
+	
 	resp, err := h.MenuClient.DeleteFood(context.Background(), req)
 	if err != nil {
+		h.Logger.Error("DeleteFood request error: %v")
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})

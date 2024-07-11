@@ -4,11 +4,22 @@ import (
 	"api_gateway/api/handler"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+
+// @title Auth Service API
+// @version 1.0
+// @description This is a sample server for Auth Service.
+// @host localhost:8081
+// @schemes http
 func NewRouter() *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo()
+
+	// Swagger endpointini sozlash
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfileById)
