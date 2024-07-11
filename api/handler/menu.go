@@ -13,7 +13,7 @@ import (
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// // @Success 200 {object} pb.GetMenuResponse
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -41,7 +41,7 @@ func (h *Handler) CreateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// // @Success 200 {object} pb.GetMenuResponse
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -69,7 +69,7 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// // @Success 200 {object} pb.GetMenuResponse
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -99,7 +99,7 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// // @Success 200 {object} pb.GetMenuResponse
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -127,7 +127,7 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Success 200 {object} pb.GetMenuResponse
+// // @Success 200 {object} pb.GetMenuResponse
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
@@ -141,7 +141,7 @@ func (h *Handler) DeleteFood(c *gin.Context) {
 		return
 	}
 	id := c.Param("id")
-	req.Id = id	
+	req.Id = id
 	resp, err := h.MenuClient.DeleteFood(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

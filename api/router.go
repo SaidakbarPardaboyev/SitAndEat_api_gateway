@@ -4,8 +4,24 @@ import (
 	"api_gateway/api/handler"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title API Gateway
+// @version 1.0
+// @description Bu API Gatewayning Swagger hujjatlari
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
+// @BasePath /
 func NewRouter() *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo()
@@ -43,6 +59,8 @@ func NewRouter() *gin.Engine {
 	payment.POST("/createPayment", h.CreatePayments)
 	payment.GET("/getPaymentStatus/:id", h.GetPaymentStatusById)
 	payment.PUT("/updatePayment", h.UpdatePayments)
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return router
 }

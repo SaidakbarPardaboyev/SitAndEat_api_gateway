@@ -1,10 +1,14 @@
 package main
 
-import "api_gateway/api"
+import (
+	"api_gateway/api"
+	"api_gateway/config"
+)
+
 
 func main() {
 
 	r := api.NewRouter()
-	r.Run()
-
+	
+	r.Run(config.Load().API_GATEWAY)
 }
