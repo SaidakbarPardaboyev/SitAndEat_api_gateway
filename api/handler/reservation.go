@@ -65,8 +65,8 @@ func (h *Handler) GetReservation(c *gin.Context) {
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.Reservation true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.Reservation
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func (h *Handler) GetAllReservation(c *gin.Context) {
@@ -129,7 +129,7 @@ func (h *Handler) GetAllReservation(c *gin.Context) {
 	}
 
 	if len(req.UpdateAt) > 0 {
-		data := strings.Split(req.CreatedAt, "-")
+		data := strings.Split(req.UpdateAt, "-")
 		query += " and updated_at BETWEEN :updated_at1 and :updated_at2"
 		param = append(param, ":updated_at1", ":updated_at2")
 		arr = append(arr, data[0], data[1])
@@ -161,8 +161,8 @@ func (h *Handler) GetAllReservation(c *gin.Context) {
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.ReservationUpdate true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.ReservationUpdate
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func(h *Handler) UpdateReservations(c *gin.Context){
@@ -188,8 +188,8 @@ func(h *Handler) UpdateReservations(c *gin.Context){
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.DeleteReservation true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.DeleteReservation
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func(h *Handler) DeleteReservation(c *gin.Context){
@@ -211,8 +211,8 @@ func(h *Handler) DeleteReservation(c *gin.Context){
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.GetReservationsByUserId true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.GetReservationsByUserId
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func(h *Handler) GetReservationsByUserId(c *gin.Context){
@@ -234,8 +234,8 @@ func(h *Handler) GetReservationsByUserId(c *gin.Context){
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.Order true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.Order
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func(h *Handler) OrderMeal(c *gin.Context){
@@ -261,8 +261,8 @@ func(h *Handler) OrderMeal(c *gin.Context){
 // @Tags rezervatsiyalar
 // @Accept json
 // @Produce json
-// @Param reservation body pb.RequestReservations true "Rezervatsiya so'rovi"
-// @Success 200 {object} pb.ResponseReservations
+// @Param reservation body pb.PayForReservation true "Rezervatsiya so'rovi"
+// @Success 200 {object} pb.PayForReservation
 // @Failure 400 {object} gin.H
 // @Router /reservations [post]
 func(h *Handler) PayForReservation(c *gin.Context){
