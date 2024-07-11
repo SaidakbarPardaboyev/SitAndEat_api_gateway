@@ -3,13 +3,12 @@ package api
 import (
 	"api_gateway/api/handler"
 
+	_ "api_gateway/api/docs"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "api_gateway/api/docs"
-	
 )
-
 
 // @title Auth Service API
 // @version 1.0

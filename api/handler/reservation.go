@@ -4,8 +4,6 @@ import (
 	pb "api_gateway/genproto/resirvation"
 	"context"
 	"net/http"
-	"strconv"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -69,84 +67,15 @@ func (h *Handler) GetReservation(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Router /reservation/getAllReservations [get]
 func (h *Handler) GetAllReservation(c *gin.Context) {
-	query := `
-			SELECT 
-				* 
-			FROM 
-				Reservation 
-			WHERE 
-				deleted_at is null`
-	param := []string{}
-	arr := []string{}
-
-	req := pb.Reservation{
-		Id:           c.Query("id"),
-		UserId:       c.Query("userId"),
-		RestuarantId: c.Query("restaurantId"),
-		ResTime:      c.Query("resTime"),
-		Status:       c.Query("status"),
-		CreatedAt:    c.Query("createdAt"),
-		UpdateAt:     c.Query("updatedAt"),
-	}
-	limit := c.Query("limit")
-	offset := c.Query("offset")
-
-	if len(req.Id) > 0 {
-		query += " and id = :id"
-		param = append(param, ":id")
-		arr = append(arr, req.Id)
-	}
-	if len(req.UserId) > 0 {
-		query += " and user_id = :user_id"
-		param = append(param, ":user_id")
-		arr = append(arr, req.UserId)
+	req := pb.FilterField{
+		Status:    c.Query("status"),
+		CreatedAt: c.Query("createdAt"),
+		UpdateAt:  c.Query("updatedAt"),
+		Limit:     c.Query("limit"),
+		Offset:    c.Query("offset"),
 	}
 
-	if len(req.RestuarantId) > 0 {
-		query += " and restaurant_id = :restaurant_id"
-		param = append(param, ":restaurant_id")
-		arr = append(arr, req.RestuarantId)
-	}
-
-	if len(req.ResTime) > 0 {
-		query += " and reservation_time = :reservation_time"
-		param = append(param, ":reservation_time")
-		arr = append(arr, req.ResTime)
-	}
-
-	if len(req.Status) > 0 {
-		query += " and status = :status"
-		param = append(param, ":status")
-		arr = append(arr, req.Status)
-	}
-
-	if len(req.CreatedAt) > 0 {
-		data := strings.Split(req.CreatedAt, "-")
-		query += " and created_at BETWEEN :created_at1 and :created_at2"
-		param = append(param, ":created_at1", ":created_at2")
-		arr = append(arr, data[0], data[1])
-	}
-
-	if len(req.UpdateAt) > 0 {
-		data := strings.Split(req.UpdateAt, "-")
-		query += " and updated_at BETWEEN :updated_at1 and :updated_at2"
-		param = append(param, ":updated_at1", ":updated_at2")
-		arr = append(arr, data[0], data[1])
-	}
-
-	if len(limit) > 0 {
-		query += " limit " + limit
-	}
-
-	if len(offset) > 0 {
-		query += " offset " + offset
-	}
-
-	for k, v := range param {
-		query = strings.Replace(query, v, "$"+strconv.Itoa(k), 1)
-	}
-
-	resp, err := h.ReservationClient.GetAllReservations(context.Background(), &pb.Filter{Query: query, Arr: arr})
+	resp, err := h.ReservationClient.GetAllReservations(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		h.Logger.Error("GetAll request error: %v", err)
