@@ -10,7 +10,6 @@ import (
 	"api_gateway/pkg"
 	"api_gateway/pkg/logger"
 	"log/slog"
-	"api_gateway/pkg/logger"
 )
 
 type Handler struct {
