@@ -140,7 +140,6 @@ func (h *Handler) DeleteFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),
 	}
-	
 	resp, err := h.MenuClient.DeleteFood(context.Background(), req)
 	if err != nil {
 		h.Logger.Error("DeleteFood request error: %v")
