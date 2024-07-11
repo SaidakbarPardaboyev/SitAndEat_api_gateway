@@ -18,7 +18,7 @@ import (
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu [post]
+// @Router /menu/createFood [post]
 func (h *Handler) CreateFood(c *gin.Context) {
 	req := &pb.CreateF{}
 	if err := c.ShouldBindJSON(req); err != nil {
@@ -49,7 +49,7 @@ func (h *Handler) CreateFood(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu [get]
+// @Router /menu/getAllFoods [get]
 func (h *Handler) GetAllFoods(c *gin.Context) {
 	req := &pb.Void{}
 
@@ -74,12 +74,12 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu/:id [get]
+// @Router /menu/getFood/:id [get]
 func (h *Handler) GetFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),
 	}
-	
+
 	resp, err := h.MenuClient.GetFood(context.Background(), req)
 	if err != nil {
 		h.Logger.Error("GetFood request error: %v", err)
@@ -101,7 +101,7 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu/:id [put]
+// @Router /menu/updateFood [put]
 func (h *Handler) UpdateFood(c *gin.Context) {
 	req := &pb.UpdateF{}
 	if err := c.ShouldBindJSON(req); err != nil {
@@ -132,12 +132,11 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu/:id [delete]
+// @Router /menu/deleteFood/:id [delete]
 func (h *Handler) DeleteFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),
 	}
-	
 	resp, err := h.MenuClient.DeleteFood(context.Background(), req)
 	if err != nil {
 		h.Logger.Error("DeleteFood request error: %v")

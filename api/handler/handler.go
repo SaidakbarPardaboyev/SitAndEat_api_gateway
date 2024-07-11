@@ -8,6 +8,7 @@ import (
 	"api_gateway/genproto/restaurant"
 	"api_gateway/genproto/users"
 	"api_gateway/pkg"
+	"api_gateway/pkg/logger"
 	"log/slog"
 	"api_gateway/pkg/logger"
 )

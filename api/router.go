@@ -3,12 +3,13 @@ package api
 import (
 	"api_gateway/api/handler"
 
+	_ "api_gateway/api/docs"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "api_gateway/docs"
 )
-
 
 // @title Auth Service API
 // @version 1.0
@@ -51,7 +52,7 @@ func NewRouter() *gin.Engine {
 	menu.PUT("/updateFood", h.UpdateFood)
 	menu.DELETE("/deleteFood/:id", h.DeleteFood)
 
-	payment := router.Group("/payment")
+	payment := router.Group("/payments")
 	payment.POST("/createPayment", h.CreatePayments)
 	payment.GET("/getPaymentStatus/:id", h.GetPaymentStatusById)
 	payment.PUT("/updatePayment", h.UpdatePayments)

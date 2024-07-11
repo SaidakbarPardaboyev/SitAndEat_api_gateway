@@ -87,11 +87,6 @@ definitions:
       reservationId:
         type: string
     type: object
-  payment.GetById:
-    properties:
-      id:
-        type: string
-    type: object
   payment.GetByIdResponse:
     properties:
       paymentstatus:
@@ -289,47 +284,14 @@ definitions:
       userId:
         type: string
     type: object
-host: localhost:8081
+host: localhost:4444
 info:
   contact: {}
   description: This is a sample server for Auth Service.
   title: Auth Service API
   version: "1.0"
 paths:
-  /menu:
-    get:
-      consumes:
-      - application/json
-      description: get all foods
-      parameters:
-      - description: Get Foods
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/menu.Void'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/menu.Foods'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.Error'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.Error'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.Error'
-      summary: Get All foods
-      tags:
-      - menu
+  /menu/createFood:
     post:
       consumes:
       - application/json
@@ -363,7 +325,7 @@ paths:
       summary: Get menu
       tags:
       - menu
-  /menu/:id:
+  /menu/deleteFood/:id:
     delete:
       consumes:
       - application/json
@@ -397,6 +359,41 @@ paths:
       summary: Delete food
       tags:
       - menu
+  /menu/getAllFoods:
+    get:
+      consumes:
+      - application/json
+      description: get all foods
+      parameters:
+      - description: Get Foods
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/menu.Void'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menu.Foods'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get All foods
+      tags:
+      - menu
+  /menu/getFood/:id:
     get:
       consumes:
       - application/json
@@ -429,6 +426,7 @@ paths:
             $ref: '#/definitions/models.Error'
       tags:
       - menu
+  /menu/updateFood:
     put:
       consumes:
       - application/json
@@ -462,7 +460,7 @@ paths:
       summary: Update food
       tags:
       - menu
-  /payments:
+  /payments/createPayment:
     post:
       consumes:
       - application/json
@@ -488,6 +486,30 @@ paths:
       summary: Create a payment
       tags:
       - payments
+  /payments/getPaymentStatus/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get payment status by ID
+      parameters:
+      - in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.GetByIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Get payment status by ID
+      tags:
+      - payments
+  /payments/updatePayment:
     put:
       consumes:
       - application/json
@@ -513,33 +535,33 @@ paths:
       summary: Update a payment
       tags:
       - payments
-  /payments/status:
-    get:
+  /reservation/createReservation:
+    post:
       consumes:
       - application/json
-      description: Get payment status by ID
+      description: So'rov tanasiga asoslangan holda yangi rezervatsiyani yaratish
       parameters:
-      - description: Get Payment By ID Request
+      - description: Rezervatsiya so'rovi
         in: body
-        name: request
+        name: reservation
         required: true
         schema:
-          $ref: '#/definitions/payment.GetById'
+          $ref: '#/definitions/resirvation.RequestReservations'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/payment.GetByIdResponse'
+            $ref: '#/definitions/resirvation.Status'
         "400":
           description: Bad Request
           schema:
             $ref: '#/definitions/models.Error'
-      summary: Get payment status by ID
+      summary: Yangi rezervatsiyani yaratish
       tags:
-      - payments
-  /reservation:
+      - resirvation
+  /reservation/deleteReservation/:id:
     delete:
       consumes:
       - application/json
@@ -565,6 +587,59 @@ paths:
       summary: reservationni o'chirish
       tags:
       - resirvation
+  /reservation/getAllReservations:
+    get:
+      consumes:
+      - application/json
+      description: istalgan reservatinlarni filterlab olish mumkin
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.Filter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Reservations'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: barcha reservationlarni olish
+      tags:
+      - resirvation
+  /reservation/getReservation/:id:
+    get:
+      consumes:
+      - application/json
+      description: Id bilan reservation olinyapti
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.ReservationId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Reservation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: reservation olish
+      tags:
+      - resirvation
+  /reservation/getUserReservation/:id:
     get:
       consumes:
       - application/json
@@ -590,6 +665,33 @@ paths:
       summary: user reservationni olish
       tags:
       - resirvation
+  /reservation/orderMeal:
+    post:
+      consumes:
+      - application/json
+      description: bodydagi ma'lumotlar asosida ovqat zakaz qilinmoqda
+      parameters:
+      - description: Rezervatsiya so'rovi
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/resirvation.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resirvation.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: order meal
+      tags:
+      - resirvation
+  /reservation/payForReservation:
     post:
       consumes:
       - application/json
@@ -615,6 +717,7 @@ paths:
       summary: pay for reservation
       tags:
       - resirvation
+  /reservation/updateReservation:
     put:
       consumes:
       - application/json
@@ -640,57 +743,7 @@ paths:
       summary: reservationni yangilash
       tags:
       - resirvation
-  /restaurant:
-    delete:
-      consumes:
-      - application/json
-      description: Id orqali restaurant o'chirilmoqda
-      parameters:
-      - description: Restaurant so'rovi
-        in: body
-        name: restaurant
-        required: true
-        schema:
-          $ref: '#/definitions/restaurant.RestuanantId'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/restaurant.Status'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.Error'
-      summary: restaurant o'chirish
-      tags:
-      - restaurant
-    get:
-      consumes:
-      - application/json
-      description: Istalgancha restaurantni filterlab olish mumkin
-      parameters:
-      - description: Restaurant so'rovi
-        in: body
-        name: restaurant
-        required: true
-        schema:
-          $ref: '#/definitions/restaurant.Filter'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/restaurant.Restuanants'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.Error'
-      summary: Barcha restaurantni olish
-      tags:
-      - restaurant
+  /restaurant/createRestaurant:
     post:
       consumes:
       - application/json
@@ -716,6 +769,85 @@ paths:
       summary: restaurant yaratish
       tags:
       - restaurant
+  /restaurant/deleteRestaurant/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Id orqali restaurant o'chirilmoqda
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.RestuanantId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: restaurant o'chirish
+      tags:
+      - restaurant
+  /restaurant/getAllRestaurant:
+    get:
+      consumes:
+      - application/json
+      description: Istalgancha restaurantni filterlab olish mumkin
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.Filter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.Restuanants'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Barcha restaurantni olish
+      tags:
+      - restaurant
+  /restaurant/getRestaurant/:id:
+    get:
+      consumes:
+      - application/json
+      description: Id bilan restaurant olinyapti
+      parameters:
+      - description: Restaurant so'rovi
+        in: body
+        name: restaurant
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant.RestuanantId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/restaurant.GetRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: restaurant olish
+      tags:
+      - restaurant
+  /restaurant/updateRestaurant:
     put:
       consumes:
       - application/json
@@ -741,7 +873,7 @@ paths:
       summary: restaurant yangilash
       tags:
       - restaurant
-  /users/deleteProfile/{id}:
+  /users/deleteProfile:
     delete:
       consumes:
       - application/json
@@ -767,7 +899,7 @@ paths:
       summary: Delete Profile
       tags:
       - users
-  /users/getProfile/{id}:
+  /users/getProfile/:id:
     get:
       consumes:
       - application/json
