@@ -4,8 +4,6 @@ import (
 	pb "api_gateway/genproto/restaurant"
 	"context"
 	"net/http"
-	"strconv"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -120,83 +118,15 @@ func (h *Handler) CreateRestaurant(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Router /restaurant [get]
 func (h *Handler) GetAllRestaurants(c *gin.Context) {
-	query := `
-				SELECT 
-					* 
-				FROM 
-					Restaurants
-				WHERE 
-					deleted_at is null`
-	param := []string{}
-	arr := []string{}
-	req := pb.GetRes{
-		Id:          c.Query("id"),
-		Name:        c.Query("name"),
-		Address:     c.Query("address"),
-		Phone:       c.Param("phone"),
-		Description: c.Param("description"),
-		CreatedAt:   c.Param("createdAt"),
-		UpdatedAt:   c.Param("updatedAt"),
-	}
-	limit := c.Query("limit")
-	offset := c.Query("offset")
-
-	if len(req.Id) > 0 {
-		query += " and id = :id"
-		param = append(param, ":id")
-		arr = append(arr, req.Id)
-	}
-	if len(req.Name) > 0 {
-		query += " and name = :name"
-		param = append(param, ":name")
-		arr = append(arr, req.Name)
+	req := pb.FilterField{
+		Name:      c.Param("name"),
+		Address:   c.Param("address"),
+		CreatedAt: c.Param("createdAt"),
+		Limit:     c.Param("limit"),
+		Offset:    c.Param("offset"),
 	}
 
-	if len(req.Address) > 0 {
-		query += " and address = :address"
-		param = append(param, ":address")
-		arr = append(arr, req.Address)
-	}
-
-	if len(req.Phone) > 0 {
-		query += " and phone = :phone"
-		param = append(param, ":phone")
-		arr = append(arr, req.Phone)
-	}
-
-	if len(req.Description) > 0 {
-		query += " and description = :description"
-		param = append(param, ":description")
-		arr = append(arr, req.Description)
-	}
-
-	if len(req.CreatedAt) > 0 {
-		data := strings.Split(req.CreatedAt, "-")
-		query += " and created_at BETWEEN :created_at1 and :created_at2"
-		param = append(param, ":created_at1", ":created_at2")
-		arr = append(arr, data[0], data[1])
-	}
-
-	if len(req.UpdatedAt) > 0 {
-		data := strings.Split(req.UpdatedAt, "-")
-		query += " and updated_at BETWEEN :updated_at1 and :updated_at2"
-		param = append(param, ":updated_at1", ":updated_at2")
-		arr = append(arr, data[0], data[1])
-	}
-
-	if len(limit) > 0 {
-		query += " limit " + limit
-	}
-
-	if len(offset) > 0 {
-		query += " offset " + offset
-	}
-
-	for k, v := range param {
-		query = strings.Replace(query, v, "$"+strconv.Itoa(k), 1)
-	}
-
-	resp, err := h.RestaurantClient.GetAllRestaurants(context.Background(), &pb.Filter{Query: query, Arr: arr})
+	resp, err := h.RestaurantClient.GetAllRestaurants(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		h.Logger.Error("GetAll request error: %v", err)

@@ -8,6 +8,7 @@ import (
 	"api_gateway/genproto/restaurant"
 	"api_gateway/genproto/users"
 	"api_gateway/pkg"
+	"api_gateway/pkg/logger"
 	"log/slog"
 )
 
@@ -28,5 +29,6 @@ func NewHandlerRepo() *Handler {
 		PaymentClient:     pkg.NewPaymentClient(cfg),
 		ReservationClient: pkg.NewReservationClient(cfg),
 		RestaurantClient:  pkg.NewRestaurantClient(cfg),
+		Logger: logger.NewLogger(),
 	}
 }
