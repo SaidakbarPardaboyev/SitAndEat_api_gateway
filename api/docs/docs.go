@@ -470,19 +470,6 @@ const docTemplate = `{
                 "summary": "Barcha reservationlarni olish",
                 "parameters": [
                     {
-<<<<<<< HEAD
-                        "description": "Rezervatsiya so'rovi",
-                        "name": "reservation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-<<<<<<< HEAD
-                            "$ref": "#/definitions/resirvation.Reservations"
-=======
-                            "$ref": "#/definitions/resirvation.FilterField"
->>>>>>> origin/Azizbek
-                        }
-=======
                         "type": "string",
                         "description": "Status of the reservations",
                         "name": "status",
@@ -511,7 +498,6 @@ const docTemplate = `{
                         "description": "Offset for pagination",
                         "name": "offset",
                         "in": "query"
->>>>>>> origin/hamidjon
                     }
                 ],
                 "responses": {
@@ -826,15 +812,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            "$ref": "#/definitions/restaurant.Restuanants"
-=======
                             "$ref": "#/definitions/restaurant.FilterField"
->>>>>>> origin/hamidjon
-=======
-                            "$ref": "#/definitions/restaurant.FilterField"
->>>>>>> origin/Azizbek
                         }
                     }
                 ],
@@ -934,7 +912,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/deleteProfile": {
+        "/users/deleteProfile/:id": {
             "delete": {
                 "description": "Delete Profile",
                 "consumes": [
@@ -949,13 +927,11 @@ const docTemplate = `{
                 "summary": "Delete Profile",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "Delete Profile",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/users.UserId"
-                        }
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -990,7 +966,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "User ID",
+                        "description": "get Profile",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -1215,29 +1191,6 @@ const docTemplate = `{
                 }
             }
         },
-<<<<<<< HEAD
-=======
-        "resirvation.FilterField": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "limit": {
-                    "type": "string"
-                },
-                "offset": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updateAt": {
-                    "type": "string"
-                }
-            }
-        },
->>>>>>> origin/Azizbek
         "resirvation.Order": {
             "type": "object",
             "properties": {
@@ -1338,20 +1291,6 @@ const docTemplate = `{
             "properties": {
                 "address": {
                     "type": "string"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                },
-                "createdAt": {
-=======
-                }
-            }
-        },
-        "restaurant.FilterField": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
                 },
                 "createdAt": {
                     "type": "string"
@@ -1366,21 +1305,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "offset": {
->>>>>>> origin/Azizbek
                     "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "limit": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "offset": {
-                    "type": "string"
->>>>>>> origin/hamidjon
                 }
             }
         },
@@ -1524,14 +1449,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "users.UserId": {
-            "type": "object",
-            "properties": {
-                "userId": {
                     "type": "string"
                 }
             }
