@@ -14,6 +14,7 @@ import (
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param reservation body resirvation.RequestReservations true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
@@ -41,6 +42,7 @@ func (h *Handler) CreateReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id path string true "Reservation ID"
 // @Success 200 {object} resirvation.Reservation
 // @Failure 400 {object} models.Error
@@ -84,7 +86,7 @@ func (h *Handler) GetAllReservation(c *gin.Context) {
 	resp, err := h.ReservationClient.GetAllReservations(context.Background(), &req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		h.Logger.Error("GetAll request error: %v", err)
+		h.Logger.Error("GetAll request error: %v", err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, resp)

@@ -10,6 +10,11 @@
     "paths": {
         "/menu/createFood": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get menu",
                 "consumes": [
                     "application/json"
@@ -117,6 +122,11 @@
         },
         "/menu/getAllFoods": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get all foods",
                 "consumes": [
                     "application/json"
@@ -158,6 +168,11 @@
         },
         "/menu/getFood/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get food",
                 "consumes": [
                     "application/json"
@@ -264,6 +279,11 @@
         },
         "/payments/createPayment": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new payment",
                 "consumes": [
                     "application/json"
@@ -392,6 +412,11 @@
         },
         "/reservation/createReservation": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "So'rov tanasiga asoslangan holda yangi rezervatsiyani yaratish",
                 "consumes": [
                     "application/json"
@@ -541,6 +566,11 @@
         },
         "/reservation/getReservation/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id bilan reservation olinyapti",
                 "consumes": [
                     "application/json"

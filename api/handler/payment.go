@@ -13,6 +13,7 @@ import (
 // @Tags payments
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param request body payment.CreatePayment true "Create Payment Request"
 // @Success 200 {object} payment.Status
 // @Failure 400 {object} models.Error
@@ -22,15 +23,15 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 	if err := c.ShouldBindJSON(&req); err != nil {
 		h.Logger.Error("Create payment error: %v", err)
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
+			"error": err.Error(),
 		})
 		return
 	}
 
-	resp,err:=h.PaymentClient.CreatePayments(context.Background(), &req)
-	if err != nil{
+	resp, err := h.PaymentClient.CreatePayments(context.Background(), &req)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":err.Error(),
+			"error": err.Error(),
 		})
 		h.Logger.Error("Create payment request error: %v", err)
 		return
@@ -85,22 +86,22 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Router /payments/updatePayment [put]
 func (h *Handler) UpdatePayments(c *gin.Context) {
-    req := pb.UpdatePayment{}
-    if err := c.ShouldBindJSON(&req); err != nil {
-        h.Logger.Error("UpdatePayments error: ", err)
-        c.JSON(http.StatusBadRequest, gin.H{
-            "error": err.Error(),
-        })
-        return
-    }
+	req := pb.UpdatePayment{}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		h.Logger.Error("UpdatePayments error: ", err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 
-    resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
-    if err != nil {
-        h.Logger.Error("UpdatePayments request error: ", err)
-        c.JSON(http.StatusInternalServerError, gin.H{
-            "error": err.Error(),
-        })
-        return
-    }
-    c.JSON(http.StatusOK, resp)
+	resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
+	if err != nil {
+		h.Logger.Error("UpdatePayments request error: ", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, resp)
 }

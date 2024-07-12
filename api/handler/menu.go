@@ -13,6 +13,7 @@ import (
 // @Tags menu
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param request body menu.CreateF true "Create Food"
 // @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
@@ -44,6 +45,7 @@ func (h *Handler) CreateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Success 200 {object} menu.Foods
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
@@ -68,6 +70,7 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id path string true "Food ID"
 // @Success 200 {object} menu.Food
 // @Failure 400 {object} models.Error

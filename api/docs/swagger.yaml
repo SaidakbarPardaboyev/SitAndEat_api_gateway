@@ -310,6 +310,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       summary: Get menu
       tags:
       - menu
@@ -372,6 +374,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       summary: Get All foods
       tags:
       - menu
@@ -405,6 +409,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       tags:
       - menu
   /menu/updateFood:
@@ -466,6 +472,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       summary: Create a payment
       tags:
       - payments
@@ -547,6 +555,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       summary: Yangi rezervatsiyani yaratish
       tags:
       - resirvation
@@ -641,6 +651,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
       summary: reservation olish
       tags:
       - resirvation

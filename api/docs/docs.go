@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/menu/createFood": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get menu",
                 "consumes": [
                     "application/json"
@@ -124,6 +129,11 @@ const docTemplate = `{
         },
         "/menu/getAllFoods": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get all foods",
                 "consumes": [
                     "application/json"
@@ -165,6 +175,11 @@ const docTemplate = `{
         },
         "/menu/getFood/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "get food",
                 "consumes": [
                     "application/json"
@@ -271,6 +286,11 @@ const docTemplate = `{
         },
         "/payments/createPayment": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new payment",
                 "consumes": [
                     "application/json"
@@ -399,6 +419,11 @@ const docTemplate = `{
         },
         "/reservation/createReservation": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "So'rov tanasiga asoslangan holda yangi rezervatsiyani yaratish",
                 "consumes": [
                     "application/json"
@@ -548,6 +573,11 @@ const docTemplate = `{
         },
         "/reservation/getReservation/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id bilan reservation olinyapti",
                 "consumes": [
                     "application/json"
