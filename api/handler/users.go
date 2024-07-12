@@ -24,7 +24,7 @@ func (h *Handler) GetProfileById(c *gin.Context) {
 	userId := c.Param("id")
 	fmt.Println(userId)
 	if _, err := uuid.Parse(userId); err != nil {
-		h.Logger.Error("Invalid uuid?: %v", err.Error())
+		h.Logger.Error(fmt.Sprintf("Invalid uuid?: %v", err.Error()))
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": fmt.Sprintf("Invalid uuid?: %v", err.Error()),
 		})
@@ -36,7 +36,7 @@ func (h *Handler) GetProfileById(c *gin.Context) {
 
 	res, err := h.UserClient.GetProfile(c, &req)
 	if err != nil {
-		h.Logger.Error("GetProfile request error: %v", err.Error())
+		h.Logger.Error(fmt.Sprintf("GetProfile request error: %v", err.Error()))
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
@@ -58,7 +58,7 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 	req := pb.UpdateProf{}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
-		h.Logger.Error("UpdateProfile error: %v", err.Error())
+		h.Logger.Error(fmt.Sprintf("UpdateProfile error: %v", err.Error()))
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
@@ -67,7 +67,7 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 
 	_, err := h.UserClient.UpdateProfile(c, &req)
 	if err != nil {
-		h.Logger.Error("UpdateProfile request error: %v", err.Error())
+		h.Logger.Error(fmt.Sprintf("UpdateProfile request error: %v", err.Error()))
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
