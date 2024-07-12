@@ -16,7 +16,6 @@ import (
 // @Tags users
 // @Accept json
 // @Produce json
-// @Param id path string users.UserId true "get Profile"
 // @Success 200 {object} users.GetUser
 // @Failure 400 {object} models.Error
 // @Router /users/getProfile/{id} [get]
