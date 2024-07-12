@@ -963,6 +963,18 @@ const docTemplate = `{
                     "users"
                 ],
                 "summary": "Get Profile",
+<<<<<<< HEAD
+=======
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "get Profile",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+>>>>>>> origin/hamidjon
                 "responses": {
                     "200": {
                         "description": "OK",

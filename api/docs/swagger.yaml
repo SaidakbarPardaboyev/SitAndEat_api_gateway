@@ -895,6 +895,15 @@ paths:
       consumes:
       - application/json
       description: Get Profile
+<<<<<<< HEAD
+=======
+      parameters:
+      - description: get Profile
+        in: path
+        name: id
+        required: true
+        type: string
+>>>>>>> origin/hamidjon
       produces:
       - application/json
       responses:
