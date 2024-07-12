@@ -16,7 +16,7 @@ import (
 // @Tags users
 // @Accept json
 // @Produce json
-// @Param id path string users.UserId true "get Profile"
+// @Param id path string true "get Profile"
 // @Success 200 {object} users.GetUser
 // @Failure 400 {object} models.Error
 // @Router /users/getProfile/{id} [get]
@@ -83,14 +83,14 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 // @Tags users
 // @Accept json
 // @Produce json
-// @Param id path string true "Delete Profile"
+// @Param id query string true "Delete Profile"
 // @Success 200 {object} users.Status
 // @Failure 400 {object} models.Error
-// @Router /users/deleteProfile/:id [delete]
+// @Router /users/deleteProfile/{id} [delete]
 func (h *Handler) DeleteProfile(c *gin.Context) {
-
+	id:=c.Query("id")
 	req := pb.UserId{
-		UserId: c.Param("id"),
+		UserId: id,
 	}
 
 	_, err := h.UserClient.DeleteProfile(c, &req)

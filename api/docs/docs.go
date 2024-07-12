@@ -910,7 +910,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/deleteProfile": {
+        "/users/deleteProfile/{id}": {
             "delete": {
                 "description": "Delete Profile",
                 "consumes": [
@@ -925,13 +925,11 @@ const docTemplate = `{
                 "summary": "Delete Profile",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "Delete Profile",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/users.UserId"
-                        }
+                        "name": "id",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -966,7 +964,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "User ID",
+                        "description": "get Profile",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -1453,14 +1451,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "users.UserId": {
-            "type": "object",
-            "properties": {
-                "userId": {
                     "type": "string"
                 }
             }

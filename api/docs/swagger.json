@@ -906,7 +906,7 @@
                 }
             }
         },
-        "/users/deleteProfile": {
+        "/users/deleteProfile/{id}": {
             "delete": {
                 "description": "Delete Profile",
                 "consumes": [
@@ -921,13 +921,11 @@
                 "summary": "Delete Profile",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "Delete Profile",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/users.UserId"
-                        }
+                        "name": "id",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -962,7 +960,7 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "User ID",
+                        "description": "get Profile",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -1449,14 +1447,6 @@
                     "type": "string"
                 },
                 "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "users.UserId": {
-            "type": "object",
-            "properties": {
-                "userId": {
                     "type": "string"
                 }
             }
