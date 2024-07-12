@@ -28,7 +28,7 @@ func NewRouter() *gin.Engine {
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfileById)
 	users.PUT("/updateProfile", h.UpdateProfile)
-	users.DELETE("/deleteProfile", h.DeleteProfile)
+	users.DELETE("/deleteProfile/:id", h.DeleteProfile)
 
 	restaurant := router.Group("/restaurant")
 	restaurant.GET("/getRestaurant/:id", h.GetRestaurant)

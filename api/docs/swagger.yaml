@@ -865,14 +865,14 @@ paths:
       summary: restaurant yangilash
       tags:
       - restaurant
-  /users/deleteProfile/:id:
+  /users/deleteProfile/{id}:
     delete:
       consumes:
       - application/json
       description: Delete Profile
       parameters:
       - description: Delete Profile
-        in: path
+        in: query
         name: id
         required: true
         type: string
@@ -895,15 +895,12 @@ paths:
       consumes:
       - application/json
       description: Get Profile
-<<<<<<< HEAD
-=======
       parameters:
       - description: get Profile
         in: path
         name: id
         required: true
         type: string
->>>>>>> origin/hamidjon
       produces:
       - application/json
       responses:

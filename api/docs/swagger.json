@@ -908,7 +908,7 @@
                 }
             }
         },
-        "/users/deleteProfile/:id": {
+        "/users/deleteProfile/{id}": {
             "delete": {
                 "description": "Delete Profile",
                 "consumes": [
@@ -926,7 +926,7 @@
                         "type": "string",
                         "description": "Delete Profile",
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -959,8 +959,6 @@
                     "users"
                 ],
                 "summary": "Get Profile",
-<<<<<<< HEAD
-=======
                 "parameters": [
                     {
                         "type": "string",
@@ -970,7 +968,6 @@
                         "required": true
                     }
                 ],
->>>>>>> origin/hamidjon
                 "responses": {
                     "200": {
                         "description": "OK",

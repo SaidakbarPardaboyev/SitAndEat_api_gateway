@@ -912,7 +912,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/deleteProfile/:id": {
+        "/users/deleteProfile/{id}": {
             "delete": {
                 "description": "Delete Profile",
                 "consumes": [
@@ -930,7 +930,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Profile",
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -963,8 +963,6 @@ const docTemplate = `{
                     "users"
                 ],
                 "summary": "Get Profile",
-<<<<<<< HEAD
-=======
                 "parameters": [
                     {
                         "type": "string",
@@ -974,7 +972,6 @@ const docTemplate = `{
                         "required": true
                     }
                 ],
->>>>>>> origin/hamidjon
                 "responses": {
                     "200": {
                         "description": "OK",
