@@ -295,7 +295,7 @@
                 }
             }
         },
-        "/payments/getPaymentStatus/:id": {
+        "/payments/getPaymentStatus/{id}": {
             "get": {
                 "description": "Get payment status by ID",
                 "consumes": [
@@ -311,8 +311,10 @@
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Payment ID",
                         "name": "id",
-                        "in": "path"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -470,7 +472,11 @@
                         "in": "body",
                         "required": true,
                         "schema": {
+<<<<<<< HEAD
                             "$ref": "#/definitions/resirvation.Reservations"
+=======
+                            "$ref": "#/definitions/resirvation.FilterField"
+>>>>>>> origin/Azizbek
                         }
 =======
                         "type": "string",
@@ -817,10 +823,14 @@
                         "required": true,
                         "schema": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                             "$ref": "#/definitions/restaurant.Restuanants"
 =======
                             "$ref": "#/definitions/restaurant.FilterField"
 >>>>>>> origin/hamidjon
+=======
+                            "$ref": "#/definitions/restaurant.FilterField"
+>>>>>>> origin/Azizbek
                         }
                     }
                 ],
@@ -1201,6 +1211,29 @@
                 }
             }
         },
+<<<<<<< HEAD
+=======
+        "resirvation.FilterField": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateAt": {
+                    "type": "string"
+                }
+            }
+        },
+>>>>>>> origin/Azizbek
         "resirvation.Order": {
             "type": "object",
             "properties": {
@@ -1302,9 +1335,34 @@
                 "address": {
                     "type": "string"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 },
                 "createdAt": {
+=======
+                }
+            }
+        },
+        "restaurant.FilterField": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
+>>>>>>> origin/Azizbek
                     "type": "string"
                 },
                 "description": {

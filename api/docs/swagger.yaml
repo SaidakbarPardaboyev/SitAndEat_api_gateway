@@ -103,6 +103,22 @@ definitions:
       payment_status:
         type: string
     type: object
+<<<<<<< HEAD
+=======
+  resirvation.FilterField:
+    properties:
+      createdAt:
+        type: string
+      limit:
+        type: string
+      offset:
+        type: string
+      status:
+        type: string
+      updateAt:
+        type: string
+    type: object
+>>>>>>> origin/Azizbek
   resirvation.Order:
     properties:
       menuItemId:
@@ -169,8 +185,25 @@ definitions:
       address:
         type: string
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       createdAt:
+=======
+    type: object
+  restaurant.FilterField:
+    properties:
+      address:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      limit:
+        type: string
+      name:
+        type: string
+      offset:
+>>>>>>> origin/Azizbek
         type: string
       description:
         type: string
@@ -473,14 +506,16 @@ paths:
       summary: Create a payment
       tags:
       - payments
-  /payments/getPaymentStatus/:id:
+  /payments/getPaymentStatus/{id}:
     get:
       consumes:
       - application/json
       description: Get payment status by ID
       parameters:
-      - in: path
+      - description: Payment ID
+        in: path
         name: id
+        required: true
         type: string
       produces:
       - application/json
@@ -585,6 +620,7 @@ paths:
         name: reservation
         required: true
         schema:
+<<<<<<< HEAD
           $ref: '#/definitions/resirvation.Reservations'
 =======
       - description: Status of the reservations
@@ -608,6 +644,9 @@ paths:
         name: offset
         type: integer
 >>>>>>> origin/hamidjon
+=======
+          $ref: '#/definitions/resirvation.FilterField'
+>>>>>>> origin/Azizbek
       produces:
       - application/json
       responses:
@@ -814,10 +853,14 @@ paths:
         required: true
         schema:
 <<<<<<< HEAD
+<<<<<<< HEAD
           $ref: '#/definitions/restaurant.Restuanants'
 =======
           $ref: '#/definitions/restaurant.FilterField'
 >>>>>>> origin/hamidjon
+=======
+          $ref: '#/definitions/restaurant.FilterField'
+>>>>>>> origin/Azizbek
       produces:
       - application/json
       responses:

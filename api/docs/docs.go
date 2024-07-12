@@ -299,7 +299,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/payments/getPaymentStatus/:id": {
+        "/payments/getPaymentStatus/{id}": {
             "get": {
                 "description": "Get payment status by ID",
                 "consumes": [
@@ -315,8 +315,10 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Payment ID",
                         "name": "id",
-                        "in": "path"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -474,7 +476,11 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
+<<<<<<< HEAD
                             "$ref": "#/definitions/resirvation.Reservations"
+=======
+                            "$ref": "#/definitions/resirvation.FilterField"
+>>>>>>> origin/Azizbek
                         }
 =======
                         "type": "string",
@@ -821,10 +827,14 @@ const docTemplate = `{
                         "required": true,
                         "schema": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                             "$ref": "#/definitions/restaurant.Restuanants"
 =======
                             "$ref": "#/definitions/restaurant.FilterField"
 >>>>>>> origin/hamidjon
+=======
+                            "$ref": "#/definitions/restaurant.FilterField"
+>>>>>>> origin/Azizbek
                         }
                     }
                 ],
@@ -1205,6 +1215,29 @@ const docTemplate = `{
                 }
             }
         },
+<<<<<<< HEAD
+=======
+        "resirvation.FilterField": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateAt": {
+                    "type": "string"
+                }
+            }
+        },
+>>>>>>> origin/Azizbek
         "resirvation.Order": {
             "type": "object",
             "properties": {
@@ -1306,9 +1339,34 @@ const docTemplate = `{
                 "address": {
                     "type": "string"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 },
                 "createdAt": {
+=======
+                }
+            }
+        },
+        "restaurant.FilterField": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
+>>>>>>> origin/Azizbek
                     "type": "string"
                 },
                 "description": {
