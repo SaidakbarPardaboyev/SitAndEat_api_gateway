@@ -490,7 +490,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/resirvation.Filter"
+                            "$ref": "#/definitions/resirvation.Reservations"
                         }
                     }
                 ],
@@ -810,7 +810,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/restaurant.Filter"
+                            "$ref": "#/definitions/restaurant.Restuanants"
                         }
                     }
                 ],
@@ -950,7 +950,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/getProfile/:id": {
+        "/users/getProfile/{id}": {
             "get": {
                 "description": "Get Profile",
                 "consumes": [
@@ -965,13 +965,11 @@ const docTemplate = `{
                 "summary": "Get Profile",
                 "parameters": [
                     {
-                        "description": "get Profile",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/users.UserId"
-                        }
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -979,6 +977,46 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/users.GetUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/updateProfile": {
+            "put": {
+                "description": "Update Profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update Profile",
+                "parameters": [
+                    {
+                        "description": "Update Profile",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.UpdateProf"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users.Status"
                         }
                     },
                     "400": {
@@ -1164,20 +1202,6 @@ const docTemplate = `{
                 }
             }
         },
-        "resirvation.Filter": {
-            "type": "object",
-            "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "query": {
-                    "type": "string"
-                }
-            }
-        },
         "resirvation.Order": {
             "type": "object",
             "properties": {
@@ -1285,20 +1309,6 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "Id": {
-                    "type": "string"
-                }
-            }
-        },
-        "restaurant.Filter": {
-            "type": "object",
-            "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "query": {
                     "type": "string"
                 }
             }
@@ -1424,6 +1434,26 @@ const docTemplate = `{
             "properties": {
                 "status": {
                     "type": "boolean"
+                }
+            }
+        },
+        "users.UpdateProf": {
+            "type": "object",
+            "properties": {
+                "UserId": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
                 }
             }
         },
