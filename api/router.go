@@ -2,11 +2,13 @@ package api
 
 import (
 	"api_gateway/api/handler"
+	"api_gateway/api/middleware"
+
+	_ "api_gateway/api/docs"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "api_gateway/api/docs"
 )
 
 // @title Auth Service API
@@ -20,6 +22,7 @@ func NewRouter() *gin.Engine {
 
 	// Swagger endpointini sozlash
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.Use(middleware.JWTMiddleware())
 
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfileById)

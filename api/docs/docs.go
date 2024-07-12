@@ -314,7 +314,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/payments/getPaymentStatus/:id": {
+        "/payments/getPaymentStatus/{id}": {
             "get": {
                 "description": "Get payment status by ID",
                 "consumes": [
@@ -330,8 +330,10 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Payment ID",
                         "name": "id",
-                        "in": "path"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -490,7 +492,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/resirvation.Filter"
+                            "$ref": "#/definitions/resirvation.FilterField"
                         }
                     }
                 ],
@@ -810,7 +812,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/restaurant.Filter"
+                            "$ref": "#/definitions/restaurant.FilterField"
                         }
                     }
                 ],
@@ -1164,16 +1166,22 @@ const docTemplate = `{
                 }
             }
         },
-        "resirvation.Filter": {
+        "resirvation.FilterField": {
             "type": "object",
             "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "createdAt": {
+                    "type": "string"
                 },
-                "query": {
+                "limit": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateAt": {
                     "type": "string"
                 }
             }
@@ -1289,16 +1297,25 @@ const docTemplate = `{
                 }
             }
         },
-        "restaurant.Filter": {
+        "restaurant.FilterField": {
             "type": "object",
             "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "address": {
+                    "type": "string"
                 },
-                "query": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
                     "type": "string"
                 }
             }

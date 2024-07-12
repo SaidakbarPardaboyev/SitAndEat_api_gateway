@@ -110,13 +110,17 @@ definitions:
       payment_status:
         type: string
     type: object
-  resirvation.Filter:
+  resirvation.FilterField:
     properties:
-      arr:
-        items:
-          type: string
-        type: array
-      query:
+      createdAt:
+        type: string
+      limit:
+        type: string
+      offset:
+        type: string
+      status:
+        type: string
+      updateAt:
         type: string
     type: object
   resirvation.Order:
@@ -190,13 +194,19 @@ definitions:
       Id:
         type: string
     type: object
-  restaurant.Filter:
+  restaurant.FilterField:
     properties:
-      arr:
-        items:
-          type: string
-        type: array
-      query:
+      address:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      limit:
+        type: string
+      name:
+        type: string
+      offset:
         type: string
     type: object
   restaurant.GetRes:
@@ -486,14 +496,16 @@ paths:
       summary: Create a payment
       tags:
       - payments
-  /payments/getPaymentStatus/:id:
+  /payments/getPaymentStatus/{id}:
     get:
       consumes:
       - application/json
       description: Get payment status by ID
       parameters:
-      - in: path
+      - description: Payment ID
+        in: path
         name: id
+        required: true
         type: string
       produces:
       - application/json
@@ -598,7 +610,7 @@ paths:
         name: reservation
         required: true
         schema:
-          $ref: '#/definitions/resirvation.Filter'
+          $ref: '#/definitions/resirvation.FilterField'
       produces:
       - application/json
       responses:
@@ -806,7 +818,7 @@ paths:
         name: restaurant
         required: true
         schema:
-          $ref: '#/definitions/restaurant.Filter'
+          $ref: '#/definitions/restaurant.FilterField'
       produces:
       - application/json
       responses:

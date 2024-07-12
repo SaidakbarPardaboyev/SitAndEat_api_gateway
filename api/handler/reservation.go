@@ -62,7 +62,7 @@ func (h *Handler) GetReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
-// @Param reservation body resirvation.Filter true "Rezervatsiya so'rovi"
+// @Param reservation body resirvation.FilterField true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
 // @Router /reservation/getAllReservations [get]

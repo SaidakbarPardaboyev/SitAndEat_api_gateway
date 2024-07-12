@@ -310,7 +310,7 @@
                 }
             }
         },
-        "/payments/getPaymentStatus/:id": {
+        "/payments/getPaymentStatus/{id}": {
             "get": {
                 "description": "Get payment status by ID",
                 "consumes": [
@@ -326,8 +326,10 @@
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Payment ID",
                         "name": "id",
-                        "in": "path"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -486,7 +488,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/resirvation.Filter"
+                            "$ref": "#/definitions/resirvation.FilterField"
                         }
                     }
                 ],
@@ -806,7 +808,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/restaurant.Filter"
+                            "$ref": "#/definitions/restaurant.FilterField"
                         }
                     }
                 ],
@@ -1160,16 +1162,22 @@
                 }
             }
         },
-        "resirvation.Filter": {
+        "resirvation.FilterField": {
             "type": "object",
             "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "createdAt": {
+                    "type": "string"
                 },
-                "query": {
+                "limit": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateAt": {
                     "type": "string"
                 }
             }
@@ -1285,16 +1293,25 @@
                 }
             }
         },
-        "restaurant.Filter": {
+        "restaurant.FilterField": {
             "type": "object",
             "properties": {
-                "arr": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "address": {
+                    "type": "string"
                 },
-                "query": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
                     "type": "string"
                 }
             }

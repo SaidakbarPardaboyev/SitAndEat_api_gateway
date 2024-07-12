@@ -43,24 +43,34 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 // @Tags payments
 // @Accept  json
 // @Produce  json
-// @Param request path payment.GetById true "Get Payment By ID Request"
+// @Param id path string true "Payment ID"
 // @Success 200 {object} payment.GetByIdResponse
 // @Failure 400 {object} models.Error
-// @Router /payments/getPaymentStatus/:id [get]
+// @Router /payments/getPaymentStatus/{id} [get]
 func (h *Handler) GetPaymentStatusById(c *gin.Context) {
+	id := c.Param("id")
+	if id == "" {
+		h.Logger.Error("ID parameter is missing")
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "ID parameter is missing",
+		})
+		return
+	}
+
 	req := pb.GetById{
-		Id: c.Param("id"),
+		Id: id,
 	}
 
 	resp, err := h.PaymentClient.GetPaymentStatusById(context.Background(), &req)
 	if err != nil {
 		h.Logger.Error("GetPaymentStatusById request error: %v", err)
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
+		return
 	}
 
-	c.JSON(200,resp)
+	c.JSON(http.StatusOK, resp)
 }
 
 // @Summary Update a payment
@@ -73,20 +83,22 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context) {
 // @Failure 400 {object} models.Error
 // @Router /payments/updatePayment [put]
 func (h *Handler) UpdatePayments(c *gin.Context) {
-	req := pb.UpdatePayment{}
-	if err := c.ShouldBindJSON(&req); err != nil {
-		h.Logger.Error("UpdatePayments error: %v", err)
-		c.JSON(400, gin.H{
-			"error": err.Error(),
-		})
-	}
+    req := pb.UpdatePayment{}
+    if err := c.ShouldBindJSON(&req); err != nil {
+        h.Logger.Error("UpdatePayments error: ", err)
+        c.JSON(http.StatusBadRequest, gin.H{
+            "error": err.Error(),
+        })
+        return
+    }
 
-	resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
-	if err != nil {
-		h.Logger.Error("UpdatePayments request error: %v", err)
-		c.JSON(500, gin.H{
-			"error": err.Error(),
-		})
-	}
-	c.JSON(200,resp)
+    resp, err := h.PaymentClient.UpdatePayments(context.Background(), &req)
+    if err != nil {
+        h.Logger.Error("UpdatePayments request error: ", err)
+        c.JSON(http.StatusInternalServerError, gin.H{
+            "error": err.Error(),
+        })
+        return
+    }
+    c.JSON(http.StatusOK, resp)
 }
