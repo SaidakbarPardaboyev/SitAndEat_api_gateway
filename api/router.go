@@ -62,5 +62,10 @@ func NewRouter() *gin.Engine {
 	payment.GET("/getPaymentStatus/:id", h.GetPaymentStatusById)
 	payment.PUT("/updatePayment", h.UpdatePayments)
 
+	meal := router.Group("/meal")
+	meal.POST("createMeal", h.CretaeMeal)
+	meal.PUT("updateMeal", h.UpdateMeal)
+	meal.DELETE("deleteMeal", h.DeleteMeal)
+
 	return router
 }

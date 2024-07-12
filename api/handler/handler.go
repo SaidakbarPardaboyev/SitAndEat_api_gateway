@@ -3,6 +3,7 @@ package handler
 import (
 	"api_gateway/config"
 	"api_gateway/genproto/menu"
+	"api_gateway/genproto/menuRedis"
 	"api_gateway/genproto/payment"
 	"api_gateway/genproto/resirvation"
 	"api_gateway/genproto/restaurant"
@@ -19,6 +20,7 @@ type Handler struct {
 	ReservationClient resirvation.ResirvationClient
 	RestaurantClient  restaurant.RestaurantClient
 	Logger            *slog.Logger
+	Redis             menuRedis.MenuClient
 }
 
 func NewHandlerRepo() *Handler {
@@ -29,6 +31,7 @@ func NewHandlerRepo() *Handler {
 		PaymentClient:     pkg.NewPaymentClient(cfg),
 		ReservationClient: pkg.NewReservationClient(cfg),
 		RestaurantClient:  pkg.NewRestaurantClient(cfg),
+		Redis:             pkg.NewMenuRedisClient(cfg),
 		Logger:            logger.NewLogger(),
 	}
 }

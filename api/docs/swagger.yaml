@@ -64,6 +64,23 @@ definitions:
       restuarantId:
         type: string
     type: object
+  menuRedis.MealCreate:
+    properties:
+      meal_id:
+        type: string
+      quality:
+        type: integer
+    type: object
+  menuRedis.MealDelete:
+    properties:
+      meal_id:
+        type: string
+    type: object
+  menuRedis.Status:
+    properties:
+      status:
+        type: boolean
+    type: object
   models.Error:
     properties:
       error:
@@ -169,8 +186,6 @@ definitions:
       address:
         type: string
       createdAt:
-        type: string
-      description:
         type: string
       limit:
         type: string
@@ -279,6 +294,90 @@ info:
   title: Auth Service API3
   version: "1.0"
 paths:
+  /meal/createMeal:
+    post:
+      consumes:
+      - application/json
+      description: Yangi meal yaratish uchun endpoint
+      parameters:
+      - description: Yangi meal so'rovi
+        in: body
+        name: meal
+        required: true
+        schema:
+          $ref: '#/definitions/menuRedis.MealCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menuRedis.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Yangi meal yaratish
+      tags:
+      - meal
+  /meal/deleteMeal:
+    delete:
+      consumes:
+      - application/json
+      description: Mealni o'chirish
+      parameters:
+      - description: Yangi meal so'rovi
+        in: body
+        name: meal
+        required: true
+        schema:
+          $ref: '#/definitions/menuRedis.MealDelete'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menuRedis.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Mealni o'chirish
+      tags:
+      - meal
+  /meal/updateMeal:
+    put:
+      consumes:
+      - application/json
+      description: Mealni yangilash
+      parameters:
+      - description: Yangi meal so'rovi
+        in: body
+        name: meal
+        required: true
+        schema:
+          $ref: '#/definitions/menuRedis.MealCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/menuRedis.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Mealni yangilash
+      tags:
+      - meal
   /menu/createFood:
     post:
       consumes:

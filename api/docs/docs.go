@@ -15,6 +15,141 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/meal/createMeal": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Yangi meal yaratish uchun endpoint",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "meal"
+                ],
+                "summary": "Yangi meal yaratish",
+                "parameters": [
+                    {
+                        "description": "Yangi meal so'rovi",
+                        "name": "meal",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.MealCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.Status"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/meal/deleteMeal": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Mealni o'chirish",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "meal"
+                ],
+                "summary": "Mealni o'chirish",
+                "parameters": [
+                    {
+                        "description": "Yangi meal so'rovi",
+                        "name": "meal",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.MealDelete"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.Status"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/meal/updateMeal": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Mealni yangilash",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "meal"
+                ],
+                "summary": "Mealni yangilash",
+                "parameters": [
+                    {
+                        "description": "Yangi meal so'rovi",
+                        "name": "meal",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.MealCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/menuRedis.Status"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/menu/createFood": {
             "post": {
                 "security": [
@@ -1250,6 +1385,33 @@ const docTemplate = `{
                 }
             }
         },
+        "menuRedis.MealCreate": {
+            "type": "object",
+            "properties": {
+                "meal_id": {
+                    "type": "string"
+                },
+                "quality": {
+                    "type": "integer"
+                }
+            }
+        },
+        "menuRedis.MealDelete": {
+            "type": "object",
+            "properties": {
+                "meal_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "menuRedis.Status": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "boolean"
+                }
+            }
+        },
         "models.Error": {
             "type": "object",
             "properties": {
@@ -1413,9 +1575,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "type": "string"
-                },
-                "description": {
                     "type": "string"
                 },
                 "limit": {

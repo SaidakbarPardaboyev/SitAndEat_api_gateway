@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.4.0
 // - protoc             v3.12.4
-// source: menu.proto
+// source: menuRedis.proto
 
 package menuRedis
 
@@ -220,5 +220,5 @@ var Menu_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "menu.proto",
+	Metadata: "menuRedis.proto",
 }

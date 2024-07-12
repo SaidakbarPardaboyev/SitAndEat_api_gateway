@@ -1,12 +1,13 @@
 package pkg
 
 import (
+	"api_gateway/config"
+	pmenu "api_gateway/genproto/menu"
+	"api_gateway/genproto/menuRedis"
 	ppay "api_gateway/genproto/payment"
 	presirvation "api_gateway/genproto/resirvation"
-	pmenu "api_gateway/genproto/menu"
 	prestaurant "api_gateway/genproto/restaurant"
 	user "api_gateway/genproto/users"
-	"api_gateway/config"
 	"log"
 
 	"google.golang.org/grpc"
@@ -51,4 +52,12 @@ func NewUsersClient(cfg *config.Config) user.UsersClient {
 		log.Fatal(err)
 	}
 	return user.NewUsersClient(conn)
+}
+
+func NewMenuRedisClient(cfg *config.Config) menuRedis.MenuClient {
+	conn, err := grpc.NewClient(cfg.RESERVATION_SERVICE, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil{
+		log.Fatal(err)
+	}
+	return menuRedis.NewMenuClient(conn)
 }
