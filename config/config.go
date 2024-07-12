@@ -22,7 +22,7 @@ type Config struct {
 }
 
 func Load() *Config {
-	if err := godotenv.Load(".env"); err != nil {
+	if err := godotenv.Load("/home/hamidjon/Desktop/Restaurant/SitAndEat_api_gateway/.env"); err != nil {
 		log.Print("No .env file found")
 	}
 
@@ -35,7 +35,7 @@ func Load() *Config {
 	config.API_GATEWAY = cast.ToString(Coalesce("API_GATEWAY", "50051"))
 	config.USER_SERVICE = cast.ToString(Coalesce("USER_SERVICE", "50051"))
 	config.PAYMENT_SERVICE = cast.ToString(Coalesce("PAYMENT_SERVICE", "50051"))
-	config.RESERVATION_SERVICE = cast.ToString(Coalesce("RESERVATION_SERVICE", "50051"))
+	config.RESERVATION_SERVICE = cast.ToString(Coalesce("RESERVATION_SERVICE", "6666"))
 	config.SIGNING_KEY = cast.ToString(Coalesce("SIGNING_KEY", "secret"))
 
 	return &config

@@ -44,7 +44,6 @@ func (h *Handler) CreateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Param request body menu.Void true "Get Foods"
 // @Success 200 {object} menu.Foods
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
@@ -69,12 +68,12 @@ func (h *Handler) GetAllFoods(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Param request body menu.FoodId true "Get Food"
+// @Param id path string true "Food ID"
 // @Success 200 {object} menu.Food
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu/getFood/:id [get]
+// @Router /menu/getFood/{id} [get]
 func (h *Handler) GetFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),
@@ -127,12 +126,12 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 // @Tags menu
 // @Accept json
 // @Produce json
-// @Param request body menu.FoodId true "Delete Food"
+// @Param id path string true "Food ID"
 // @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
 // @Failure 500 {object} models.Error
-// @Router /menu/deleteFood/:id [delete]
+// @Router /menu/deleteFood/{id} [delete]
 func (h *Handler) DeleteFood(c *gin.Context) {
 	req := &pb.FoodId{
 		Id: c.Param("id"),

@@ -3,6 +3,7 @@ package handler
 import (
 	pb "api_gateway/genproto/resirvation"
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -28,8 +29,8 @@ func (h *Handler) CreateReservation(c *gin.Context) {
 
 	resp, err := h.ReservationClient.Createreservations(context.Background(), &req)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		h.Logger.Error("Create reservation request error: %v", err)
+		fmt.Println(err)
+		h.Logger.Error("Create reservation request error: ", err)
 		return
 	}
 	c.JSON(http.StatusOK, resp)
@@ -40,10 +41,10 @@ func (h *Handler) CreateReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
-// @Param reservation body resirvation.ReservationId true "Rezervatsiya so'rovi"
+// @Param id path string true "Reservation ID"
 // @Success 200 {object} resirvation.Reservation
 // @Failure 400 {object} models.Error
-// @Router /reservation/getReservation/:id [get]
+// @Router /reservation/getReservation/{id} [get]
 func (h *Handler) GetReservation(c *gin.Context) {
 	id := c.Param("id")
 	req := pb.ReservationId{Id: id}
@@ -57,12 +58,16 @@ func (h *Handler) GetReservation(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Summary barcha reservationlarni olish
-// @Description istalgan reservatinlarni filterlab olish mumkin
-// @Tags resirvation
+// @Summary Barcha reservationlarni olish
+// @Description Istalgan reservatinlarni filterlab olish mumkin
+// @Tags reservation
 // @Accept json
 // @Produce json
-// @Param reservation body resirvation.Filter true "Rezervatsiya so'rovi"
+// @Param status query string false "Status of the reservations"
+// @Param createdAt query string false "Creation date of the reservations"
+// @Param updatedAt query string false "Last update date of the reservations"
+// @Param limit query integer false "Limit the number of results"
+// @Param offset query integer false "Offset for pagination"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
 // @Router /reservation/getAllReservations [get]
@@ -116,10 +121,10 @@ func (h *Handler) UpdateReservations(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
-// @Param reservation body resirvation.ReservationId true "Rezervatsiya so'rovi"
+// @Param id path string true "Reservation ID"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
-// @Router /reservation/deleteReservation/:id [delete]
+// @Router /reservation/deleteReservation/{id} [delete]
 func (h *Handler) DeleteReservation(c *gin.Context) {
 	req := pb.ReservationId{
 		Id: c.Param("id"),
@@ -139,14 +144,15 @@ func (h *Handler) DeleteReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
-// @Param reservation body resirvation.UserId true "Rezervatsiya so'rovi"
+// @Param id path string true "User ID"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
-// @Router /reservation/getUserReservation/:id [get]
+// @Router /reservation/getUserReservation/{id} [get]
 func (h *Handler) GetReservationsByUserId(c *gin.Context) {
 	req := pb.UserId{
-		Id: c.Param("userId"),
+		Id: c.Param("id"),
 	}
+	fmt.Println(req.Id)
 
 	resp, err := h.ReservationClient.GetReservationsByUserId(context.Background(), &req)
 	if err != nil {
