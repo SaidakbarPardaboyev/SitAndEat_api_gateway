@@ -67,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/menu/deleteFood/:id": {
+        "/menu/deleteFood/{id}": {
             "delete": {
                 "description": "delete food",
                 "consumes": [
@@ -82,13 +82,11 @@ const docTemplate = `{
                 "summary": "Delete food",
                 "parameters": [
                     {
-                        "description": "Delete Food",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/menu.FoodId"
-                        }
+                        "type": "string",
+                        "description": "Food ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -132,17 +130,6 @@ const docTemplate = `{
                     "menu"
                 ],
                 "summary": "Get All foods",
-                "parameters": [
-                    {
-                        "description": "Get Foods",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/menu.Void"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -171,7 +158,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/menu/getFood/:id": {
+        "/menu/getFood/{id}": {
             "get": {
                 "description": "get food",
                 "consumes": [
@@ -185,13 +172,11 @@ const docTemplate = `{
                 ],
                 "parameters": [
                     {
-                        "description": "Get Food",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/menu.FoodId"
-                        }
+                        "type": "string",
+                        "description": "Food ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -314,7 +299,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/payments/getPaymentStatus/:id": {
+        "/payments/getPaymentStatus/{id}": {
             "get": {
                 "description": "Get payment status by ID",
                 "consumes": [
@@ -330,8 +315,10 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Payment ID",
                         "name": "id",
-                        "in": "path"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -430,7 +417,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/reservation/deleteReservation/:id": {
+        "/reservation/deleteReservation/{id}": {
             "delete": {
                 "description": "reservation id sini paramdan o'qigan holda uni o'chirmoqda",
                 "consumes": [
@@ -445,13 +432,11 @@ const docTemplate = `{
                 "summary": "reservationni o'chirish",
                 "parameters": [
                     {
-                        "description": "Rezervatsiya so'rovi",
-                        "name": "reservation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/resirvation.ReservationId"
-                        }
+                        "type": "string",
+                        "description": "Reservation ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -472,7 +457,7 @@ const docTemplate = `{
         },
         "/reservation/getAllReservations": {
             "get": {
-                "description": "istalgan reservatinlarni filterlab olish mumkin",
+                "description": "Istalgan reservatinlarni filterlab olish mumkin",
                 "consumes": [
                     "application/json"
                 ],
@@ -480,18 +465,53 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "resirvation"
+                    "reservation"
                 ],
-                "summary": "barcha reservationlarni olish",
+                "summary": "Barcha reservationlarni olish",
                 "parameters": [
                     {
+<<<<<<< HEAD
                         "description": "Rezervatsiya so'rovi",
                         "name": "reservation",
                         "in": "body",
                         "required": true,
                         "schema": {
+<<<<<<< HEAD
                             "$ref": "#/definitions/resirvation.Reservations"
+=======
+                            "$ref": "#/definitions/resirvation.FilterField"
+>>>>>>> origin/Azizbek
                         }
+=======
+                        "type": "string",
+                        "description": "Status of the reservations",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Creation date of the reservations",
+                        "name": "createdAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Last update date of the reservations",
+                        "name": "updatedAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit the number of results",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset for pagination",
+                        "name": "offset",
+                        "in": "query"
+>>>>>>> origin/hamidjon
                     }
                 ],
                 "responses": {
@@ -510,7 +530,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/reservation/getReservation/:id": {
+        "/reservation/getReservation/{id}": {
             "get": {
                 "description": "Id bilan reservation olinyapti",
                 "consumes": [
@@ -525,13 +545,11 @@ const docTemplate = `{
                 "summary": "reservation olish",
                 "parameters": [
                     {
-                        "description": "Rezervatsiya so'rovi",
-                        "name": "reservation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/resirvation.ReservationId"
-                        }
+                        "type": "string",
+                        "description": "Reservation ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -550,7 +568,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/reservation/getUserReservation/:id": {
+        "/reservation/getUserReservation/{id}": {
             "get": {
                 "description": "user id sini paramdan o'qigan holda uning reservationi olinmoqda",
                 "consumes": [
@@ -565,13 +583,11 @@ const docTemplate = `{
                 "summary": "user reservationni olish",
                 "parameters": [
                     {
-                        "description": "Rezervatsiya so'rovi",
-                        "name": "reservation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/resirvation.UserId"
-                        }
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -810,7 +826,15 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
+<<<<<<< HEAD
+<<<<<<< HEAD
                             "$ref": "#/definitions/restaurant.Restuanants"
+=======
+                            "$ref": "#/definitions/restaurant.FilterField"
+>>>>>>> origin/hamidjon
+=======
+                            "$ref": "#/definitions/restaurant.FilterField"
+>>>>>>> origin/Azizbek
                         }
                     }
                 ],
@@ -1083,14 +1107,6 @@ const docTemplate = `{
                 }
             }
         },
-        "menu.FoodId": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                }
-            }
-        },
         "menu.Foods": {
             "type": "object",
             "properties": {
@@ -1135,9 +1151,6 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
-        },
-        "menu.Void": {
-            "type": "object"
         },
         "models.Error": {
             "type": "object",
@@ -1200,6 +1213,29 @@ const docTemplate = `{
                 }
             }
         },
+<<<<<<< HEAD
+=======
+        "resirvation.FilterField": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateAt": {
+                    "type": "string"
+                }
+            }
+        },
+>>>>>>> origin/Azizbek
         "resirvation.Order": {
             "type": "object",
             "properties": {
@@ -1262,14 +1298,6 @@ const docTemplate = `{
                 }
             }
         },
-        "resirvation.ReservationId": {
-            "type": "object",
-            "properties": {
-                "Id": {
-                    "type": "string"
-                }
-            }
-        },
         "resirvation.ReservationUpdate": {
             "type": "object",
             "properties": {
@@ -1303,11 +1331,54 @@ const docTemplate = `{
                 }
             }
         },
-        "resirvation.UserId": {
+        "restaurant.FilterField": {
             "type": "object",
             "properties": {
-                "Id": {
+                "address": {
                     "type": "string"
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                },
+                "createdAt": {
+=======
+                }
+            }
+        },
+        "restaurant.FilterField": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
+>>>>>>> origin/Azizbek
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "string"
+>>>>>>> origin/hamidjon
                 }
             }
         },

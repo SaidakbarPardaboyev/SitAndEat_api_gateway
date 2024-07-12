@@ -35,11 +35,6 @@ definitions:
       update_at:
         type: string
     type: object
-  menu.FoodId:
-    properties:
-      id:
-        type: string
-    type: object
   menu.Foods:
     properties:
       foods:
@@ -68,8 +63,6 @@ definitions:
         type: number
       restuarantId:
         type: string
-    type: object
-  menu.Void:
     type: object
   models.Error:
     properties:
@@ -110,6 +103,22 @@ definitions:
       payment_status:
         type: string
     type: object
+<<<<<<< HEAD
+=======
+  resirvation.FilterField:
+    properties:
+      createdAt:
+        type: string
+      limit:
+        type: string
+      offset:
+        type: string
+      status:
+        type: string
+      updateAt:
+        type: string
+    type: object
+>>>>>>> origin/Azizbek
   resirvation.Order:
     properties:
       menuItemId:
@@ -150,11 +159,6 @@ definitions:
       userId:
         type: string
     type: object
-  resirvation.ReservationId:
-    properties:
-      Id:
-        type: string
-    type: object
   resirvation.ReservationUpdate:
     properties:
       id:
@@ -176,10 +180,40 @@ definitions:
       Status:
         type: boolean
     type: object
-  resirvation.UserId:
+  restaurant.FilterField:
     properties:
-      Id:
+      address:
         type: string
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      createdAt:
+=======
+    type: object
+  restaurant.FilterField:
+    properties:
+      address:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      limit:
+        type: string
+      name:
+        type: string
+      offset:
+>>>>>>> origin/Azizbek
+        type: string
+      description:
+        type: string
+      limit:
+        type: string
+      name:
+        type: string
+      offset:
+        type: string
+>>>>>>> origin/hamidjon
     type: object
   restaurant.GetRes:
     properties:
@@ -315,18 +349,17 @@ paths:
       summary: Get menu
       tags:
       - menu
-  /menu/deleteFood/:id:
+  /menu/deleteFood/{id}:
     delete:
       consumes:
       - application/json
       description: delete food
       parameters:
-      - description: Delete Food
-        in: body
-        name: request
+      - description: Food ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/menu.FoodId'
+        type: string
       produces:
       - application/json
       responses:
@@ -354,13 +387,6 @@ paths:
       consumes:
       - application/json
       description: get all foods
-      parameters:
-      - description: Get Foods
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/menu.Void'
       produces:
       - application/json
       responses:
@@ -383,18 +409,17 @@ paths:
       summary: Get All foods
       tags:
       - menu
-  /menu/getFood/:id:
+  /menu/getFood/{id}:
     get:
       consumes:
       - application/json
       description: get food
       parameters:
-      - description: Get Food
-        in: body
-        name: request
+      - description: Food ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/menu.FoodId'
+        type: string
       produces:
       - application/json
       responses:
@@ -476,14 +501,16 @@ paths:
       summary: Create a payment
       tags:
       - payments
-  /payments/getPaymentStatus/:id:
+  /payments/getPaymentStatus/{id}:
     get:
       consumes:
       - application/json
       description: Get payment status by ID
       parameters:
-      - in: path
+      - description: Payment ID
+        in: path
         name: id
+        required: true
         type: string
       produces:
       - application/json
@@ -551,18 +578,17 @@ paths:
       summary: Yangi rezervatsiyani yaratish
       tags:
       - resirvation
-  /reservation/deleteReservation/:id:
+  /reservation/deleteReservation/{id}:
     delete:
       consumes:
       - application/json
       description: reservation id sini paramdan o'qigan holda uni o'chirmoqda
       parameters:
-      - description: Rezervatsiya so'rovi
-        in: body
-        name: reservation
+      - description: Reservation ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/resirvation.ReservationId'
+        type: string
       produces:
       - application/json
       responses:
@@ -581,14 +607,41 @@ paths:
     get:
       consumes:
       - application/json
-      description: istalgan reservatinlarni filterlab olish mumkin
+      description: Istalgan reservatinlarni filterlab olish mumkin
       parameters:
+<<<<<<< HEAD
       - description: Rezervatsiya so'rovi
         in: body
         name: reservation
         required: true
         schema:
+<<<<<<< HEAD
           $ref: '#/definitions/resirvation.Reservations'
+=======
+      - description: Status of the reservations
+        in: query
+        name: status
+        type: string
+      - description: Creation date of the reservations
+        in: query
+        name: createdAt
+        type: string
+      - description: Last update date of the reservations
+        in: query
+        name: updatedAt
+        type: string
+      - description: Limit the number of results
+        in: query
+        name: limit
+        type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+>>>>>>> origin/hamidjon
+=======
+          $ref: '#/definitions/resirvation.FilterField'
+>>>>>>> origin/Azizbek
       produces:
       - application/json
       responses:
@@ -600,21 +653,20 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.Error'
-      summary: barcha reservationlarni olish
+      summary: Barcha reservationlarni olish
       tags:
-      - resirvation
-  /reservation/getReservation/:id:
+      - reservation
+  /reservation/getReservation/{id}:
     get:
       consumes:
       - application/json
       description: Id bilan reservation olinyapti
       parameters:
-      - description: Rezervatsiya so'rovi
-        in: body
-        name: reservation
+      - description: Reservation ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/resirvation.ReservationId'
+        type: string
       produces:
       - application/json
       responses:
@@ -629,18 +681,17 @@ paths:
       summary: reservation olish
       tags:
       - resirvation
-  /reservation/getUserReservation/:id:
+  /reservation/getUserReservation/{id}:
     get:
       consumes:
       - application/json
       description: user id sini paramdan o'qigan holda uning reservationi olinmoqda
       parameters:
-      - description: Rezervatsiya so'rovi
-        in: body
-        name: reservation
+      - description: User ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/resirvation.UserId'
+        type: string
       produces:
       - application/json
       responses:
@@ -796,7 +847,15 @@ paths:
         name: restaurant
         required: true
         schema:
+<<<<<<< HEAD
+<<<<<<< HEAD
           $ref: '#/definitions/restaurant.Restuanants'
+=======
+          $ref: '#/definitions/restaurant.FilterField'
+>>>>>>> origin/hamidjon
+=======
+          $ref: '#/definitions/restaurant.FilterField'
+>>>>>>> origin/Azizbek
       produces:
       - application/json
       responses:
