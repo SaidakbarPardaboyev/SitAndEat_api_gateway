@@ -110,15 +110,6 @@ definitions:
       payment_status:
         type: string
     type: object
-  resirvation.Filter:
-    properties:
-      arr:
-        items:
-          type: string
-        type: array
-      query:
-        type: string
-    type: object
   resirvation.Order:
     properties:
       menuItemId:
@@ -188,15 +179,6 @@ definitions:
   resirvation.UserId:
     properties:
       Id:
-        type: string
-    type: object
-  restaurant.Filter:
-    properties:
-      arr:
-        items:
-          type: string
-        type: array
-      query:
         type: string
     type: object
   restaurant.GetRes:
@@ -278,6 +260,19 @@ definitions:
     properties:
       status:
         type: boolean
+    type: object
+  users.UpdateProf:
+    properties:
+      UserId:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      username:
+        type: string
     type: object
   users.UserId:
     properties:
@@ -598,7 +593,7 @@ paths:
         name: reservation
         required: true
         schema:
-          $ref: '#/definitions/resirvation.Filter'
+          $ref: '#/definitions/resirvation.Reservations'
       produces:
       - application/json
       responses:
@@ -806,7 +801,7 @@ paths:
         name: restaurant
         required: true
         schema:
-          $ref: '#/definitions/restaurant.Filter'
+          $ref: '#/definitions/restaurant.Restuanants'
       produces:
       - application/json
       responses:
@@ -899,18 +894,17 @@ paths:
       summary: Delete Profile
       tags:
       - users
-  /users/getProfile/:id:
+  /users/getProfile/{id}:
     get:
       consumes:
       - application/json
       description: Get Profile
       parameters:
-      - description: get Profile
-        in: body
-        name: user
+      - description: User ID
+        in: path
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/users.UserId'
+        type: string
       produces:
       - application/json
       responses:
@@ -923,6 +917,32 @@ paths:
           schema:
             $ref: '#/definitions/models.Error'
       summary: Get Profile
+      tags:
+      - users
+  /users/updateProfile:
+    put:
+      consumes:
+      - application/json
+      description: Update Profile
+      parameters:
+      - description: Update Profile
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UpdateProf'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Error'
+      summary: Update Profile
       tags:
       - users
 schemes:

@@ -2,6 +2,7 @@ package api
 
 import (
 	"api_gateway/api/handler"
+	"api_gateway/api/middleware"
 
 	_ "api_gateway/api/docs"
 
@@ -22,6 +23,7 @@ func NewRouter() *gin.Engine {
 	// Swagger endpointini sozlash
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	router.Use(middleware.JWTMiddleware())
 	users := router.Group("/users")
 	users.GET("/getProfile/:id", h.GetProfileById)
 	users.PUT("/updateProfile", h.UpdateProfile)

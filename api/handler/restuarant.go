@@ -113,7 +113,7 @@ func (h *Handler) CreateRestaurant(c *gin.Context) {
 // @Tags restaurant
 // @Accept json
 // @Produce json
-// @Param restaurant body restaurant.Filter true "Restaurant so'rovi"
+// @Param restaurant body restaurant.Restuanants true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Restuanants
 // @Failure 400 {object} models.Error
 // @Router /restaurant/getAllRestaurant [get]
