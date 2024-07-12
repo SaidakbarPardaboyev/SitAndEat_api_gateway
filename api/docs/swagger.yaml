@@ -902,7 +902,7 @@ paths:
       description: Delete Profile
       parameters:
       - description: Delete Profile
-        in: query
+        in: path
         name: id
         required: true
         type: string

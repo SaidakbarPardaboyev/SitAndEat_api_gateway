@@ -86,19 +86,28 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Security ApiKeyAuth
-// @Param id query string true "Delete Profile"
+// @Param id path string true "Delete Profile"
 // @Success 200 {object} users.Status
 // @Failure 400 {object} models.Error
 // @Router /users/deleteProfile/{id} [delete]
 func (h *Handler) DeleteProfile(c *gin.Context) {
-	id := c.Query("id")
+	id := c.Param("id")
+
 	req := pb.UserId{
 		UserId: id,
 	}
 
+	if _, err := uuid.Parse(id); err != nil {
+		h.Logger.Error(fmt.Sprintf("Invalid uuid?: %v", err.Error()))
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": fmt.Sprintf("Invalid uuid?: %v", err.Error()),
+		})
+		return
+	}
+
 	_, err := h.UserClient.DeleteProfile(c, &req)
 	if err != nil {
-		h.Logger.Error("DeleteProfile request error: %v", err)
+		h.Logger.Error("DeleteProfile request error: %v", err.Error())
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})

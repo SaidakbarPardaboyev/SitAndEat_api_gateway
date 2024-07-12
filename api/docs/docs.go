@@ -1010,7 +1010,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Delete Profile",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     }
                 ],
