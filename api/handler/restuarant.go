@@ -13,6 +13,7 @@ import (
 // @Tags restaurant
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.GetRes
 // @Failure 400 {object} models.Error
@@ -36,6 +37,7 @@ func (h *Handler) GetRestaurant(c *gin.Context) {
 // @Tags restaurant
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param restaurant body restaurant.RestuarantUpdate true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
@@ -63,6 +65,7 @@ func (h *Handler) UpdateRestaurant(c *gin.Context) {
 // @Tags restaurant
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param restaurant body restaurant.RestuanantId true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
@@ -86,6 +89,7 @@ func (h *Handler) DeleteRestaurant(c *gin.Context) {
 // @Tags restaurant
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param restaurant body restaurant.Restuarant true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Status
 // @Failure 400 {object} models.Error
@@ -113,6 +117,7 @@ func (h *Handler) CreateRestaurant(c *gin.Context) {
 // @Tags restaurant
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param restaurant body restaurant.FilterField true "Restaurant so'rovi"
 // @Success 200 {object} restaurant.Restuanants
 // @Failure 400 {object} models.Error

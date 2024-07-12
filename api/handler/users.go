@@ -16,6 +16,7 @@ import (
 // @Tags users
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id path string true "get Profile"
 // @Success 200 {object} users.GetUser
 // @Failure 400 {object} models.Error
@@ -50,6 +51,7 @@ func (h *Handler) GetProfileById(c *gin.Context) {
 // @Tags users
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param user body users.UpdateProf true "Update Profile"
 // @Success 200 {object} users.Status
 // @Failure 400 {object} models.Error
@@ -83,12 +85,13 @@ func (h *Handler) UpdateProfile(c *gin.Context) {
 // @Tags users
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id query string true "Delete Profile"
 // @Success 200 {object} users.Status
 // @Failure 400 {object} models.Error
 // @Router /users/deleteProfile/{id} [delete]
 func (h *Handler) DeleteProfile(c *gin.Context) {
-	id:=c.Query("id")
+	id := c.Query("id")
 	req := pb.UserId{
 		UserId: id,
 	}

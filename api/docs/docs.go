@@ -69,6 +69,11 @@ const docTemplate = `{
         },
         "/menu/deleteFood/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "delete food",
                 "consumes": [
                     "application/json"
@@ -209,6 +214,11 @@ const docTemplate = `{
         },
         "/menu/updateFood": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "update food",
                 "consumes": [
                     "application/json"
@@ -301,6 +311,11 @@ const docTemplate = `{
         },
         "/payments/getPaymentStatus/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get payment status by ID",
                 "consumes": [
                     "application/json"
@@ -339,6 +354,11 @@ const docTemplate = `{
         },
         "/payments/updatePayment": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update an existing payment",
                 "consumes": [
                     "application/json"
@@ -419,6 +439,11 @@ const docTemplate = `{
         },
         "/reservation/deleteReservation/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "reservation id sini paramdan o'qigan holda uni o'chirmoqda",
                 "consumes": [
                     "application/json"
@@ -457,6 +482,11 @@ const docTemplate = `{
         },
         "/reservation/getAllReservations": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Istalgan reservatinlarni filterlab olish mumkin",
                 "consumes": [
                     "application/json"
@@ -556,6 +586,11 @@ const docTemplate = `{
         },
         "/reservation/getUserReservation/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "user id sini paramdan o'qigan holda uning reservationi olinmoqda",
                 "consumes": [
                     "application/json"
@@ -594,6 +629,11 @@ const docTemplate = `{
         },
         "/reservation/orderMeal": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydagi ma'lumotlar asosida ovqat zakaz qilinmoqda",
                 "consumes": [
                     "application/json"
@@ -634,6 +674,11 @@ const docTemplate = `{
         },
         "/reservation/payForReservation": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydagi ma'lumotlar asosida to'lob qilinishi kerak",
                 "consumes": [
                     "application/json"
@@ -674,6 +719,11 @@ const docTemplate = `{
         },
         "/reservation/updateReservation": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydan yangi reservationni olgan holda uni yangilamoqda",
                 "consumes": [
                     "application/json"
@@ -714,6 +764,11 @@ const docTemplate = `{
         },
         "/restaurant/createRestaurant": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Bodydagi ma'luotlar asosida restaurant yaratilyapti",
                 "consumes": [
                     "application/json"
@@ -754,6 +809,11 @@ const docTemplate = `{
         },
         "/restaurant/deleteRestaurant/:id": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id orqali restaurant o'chirilmoqda",
                 "consumes": [
                     "application/json"
@@ -794,6 +854,11 @@ const docTemplate = `{
         },
         "/restaurant/getAllRestaurant": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Istalgancha restaurantni filterlab olish mumkin",
                 "consumes": [
                     "application/json"
@@ -834,6 +899,11 @@ const docTemplate = `{
         },
         "/restaurant/getRestaurant/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id bilan restaurant olinyapti",
                 "consumes": [
                     "application/json"
@@ -874,6 +944,11 @@ const docTemplate = `{
         },
         "/restaurant/updateRestaurant": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Bodydagi ma'luotlar asosida restaurant yangilanyapti",
                 "consumes": [
                     "application/json"
@@ -914,6 +989,11 @@ const docTemplate = `{
         },
         "/users/deleteProfile/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete Profile",
                 "consumes": [
                     "application/json"
@@ -952,6 +1032,11 @@ const docTemplate = `{
         },
         "/users/getProfile/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get Profile",
                 "consumes": [
                     "application/json"
@@ -990,6 +1075,11 @@ const docTemplate = `{
         },
         "/users/updateProfile": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update Profile",
                 "consumes": [
                     "application/json"
@@ -1453,6 +1543,13 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
@@ -1461,8 +1558,8 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:4444",
 	BasePath:         "",
-	Schemes:          []string{"http"},
-	Title:            "Auth Service API",
+	Schemes:          []string{},
+	Title:            "Auth Service API3",
 	Description:      "This is a sample server for Auth Service.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

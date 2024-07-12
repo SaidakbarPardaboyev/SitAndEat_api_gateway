@@ -1,11 +1,8 @@
 {
-    "schemes": [
-        "http"
-    ],
     "swagger": "2.0",
     "info": {
         "description": "This is a sample server for Auth Service.",
-        "title": "Auth Service API",
+        "title": "Auth Service API3",
         "contact": {},
         "version": "1.0"
     },
@@ -65,6 +62,11 @@
         },
         "/menu/deleteFood/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "delete food",
                 "consumes": [
                     "application/json"
@@ -205,6 +207,11 @@
         },
         "/menu/updateFood": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "update food",
                 "consumes": [
                     "application/json"
@@ -297,6 +304,11 @@
         },
         "/payments/getPaymentStatus/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get payment status by ID",
                 "consumes": [
                     "application/json"
@@ -335,6 +347,11 @@
         },
         "/payments/updatePayment": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update an existing payment",
                 "consumes": [
                     "application/json"
@@ -415,6 +432,11 @@
         },
         "/reservation/deleteReservation/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "reservation id sini paramdan o'qigan holda uni o'chirmoqda",
                 "consumes": [
                     "application/json"
@@ -453,6 +475,11 @@
         },
         "/reservation/getAllReservations": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Istalgan reservatinlarni filterlab olish mumkin",
                 "consumes": [
                     "application/json"
@@ -552,6 +579,11 @@
         },
         "/reservation/getUserReservation/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "user id sini paramdan o'qigan holda uning reservationi olinmoqda",
                 "consumes": [
                     "application/json"
@@ -590,6 +622,11 @@
         },
         "/reservation/orderMeal": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydagi ma'lumotlar asosida ovqat zakaz qilinmoqda",
                 "consumes": [
                     "application/json"
@@ -630,6 +667,11 @@
         },
         "/reservation/payForReservation": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydagi ma'lumotlar asosida to'lob qilinishi kerak",
                 "consumes": [
                     "application/json"
@@ -670,6 +712,11 @@
         },
         "/reservation/updateReservation": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "bodydan yangi reservationni olgan holda uni yangilamoqda",
                 "consumes": [
                     "application/json"
@@ -710,6 +757,11 @@
         },
         "/restaurant/createRestaurant": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Bodydagi ma'luotlar asosida restaurant yaratilyapti",
                 "consumes": [
                     "application/json"
@@ -750,6 +802,11 @@
         },
         "/restaurant/deleteRestaurant/:id": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id orqali restaurant o'chirilmoqda",
                 "consumes": [
                     "application/json"
@@ -790,6 +847,11 @@
         },
         "/restaurant/getAllRestaurant": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Istalgancha restaurantni filterlab olish mumkin",
                 "consumes": [
                     "application/json"
@@ -830,6 +892,11 @@
         },
         "/restaurant/getRestaurant/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Id bilan restaurant olinyapti",
                 "consumes": [
                     "application/json"
@@ -870,6 +937,11 @@
         },
         "/restaurant/updateRestaurant": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Bodydagi ma'luotlar asosida restaurant yangilanyapti",
                 "consumes": [
                     "application/json"
@@ -910,6 +982,11 @@
         },
         "/users/deleteProfile/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete Profile",
                 "consumes": [
                     "application/json"
@@ -948,6 +1025,11 @@
         },
         "/users/getProfile/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get Profile",
                 "consumes": [
                     "application/json"
@@ -986,6 +1068,11 @@
         },
         "/users/updateProfile": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update Profile",
                 "consumes": [
                     "application/json"
@@ -1448,6 +1535,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

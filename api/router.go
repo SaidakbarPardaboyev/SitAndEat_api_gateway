@@ -11,15 +11,18 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title Auth Service API
+// @title Auth Service API3
 // @version 1.0
 // @description This is a sample server for Auth Service.
 // @host localhost:4444
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 // @schemes http
 func NewRouter() *gin.Engine {
 	router := gin.Default()
 	h := handler.NewHandlerRepo()
-	
+
 	// Swagger endpointini sozlash
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Use(middleware.JWTMiddleware())
