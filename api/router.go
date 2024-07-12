@@ -25,7 +25,7 @@ func NewRouter() *gin.Engine {
 
 	// Swagger endpointini sozlash
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.Use(middleware.JWTMiddleware())
+	// router.Use(middleware.JWTMiddleware())
 
 	router.Use(middleware.JWTMiddleware())
 	users := router.Group("/users")
