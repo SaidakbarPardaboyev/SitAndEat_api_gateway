@@ -43,6 +43,7 @@ func (h *Handler) CreatePayments(c *gin.Context) {
 // @Tags payments
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path string true "Payment ID"
 // @Success 200 {object} payment.GetByIdResponse
 // @Failure 400 {object} models.Error
@@ -78,6 +79,7 @@ func (h *Handler) GetPaymentStatusById(c *gin.Context) {
 // @Tags payments
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param request body payment.UpdatePayment true "Update Payment Request"
 // @Success 200 {object} payment.Status
 // @Failure 400 {object} models.Error

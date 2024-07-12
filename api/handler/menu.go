@@ -96,6 +96,7 @@ func (h *Handler) GetFood(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param request body menu.UpdateF true "Update Food"
+// @Security ApiKeyAuth
 // @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error
@@ -127,6 +128,7 @@ func (h *Handler) UpdateFood(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path string true "Food ID"
+// @Security ApiKeyAuth
 // @Success 200 {object} menu.Status
 // @Failure 400 {object} models.Error
 // @Failure 404 {object} models.Error

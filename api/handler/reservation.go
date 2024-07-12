@@ -63,6 +63,7 @@ func (h *Handler) GetReservation(c *gin.Context) {
 // @Tags reservation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param status query string false "Status of the reservations"
 // @Param createdAt query string false "Creation date of the reservations"
 // @Param updatedAt query string false "Last update date of the reservations"
@@ -94,6 +95,7 @@ func (h *Handler) GetAllReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param reservation body resirvation.ReservationUpdate true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
@@ -121,6 +123,7 @@ func (h *Handler) UpdateReservations(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id path string true "Reservation ID"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
@@ -144,6 +147,7 @@ func (h *Handler) DeleteReservation(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param id path string true "User ID"
 // @Success 200 {object} resirvation.Reservations
 // @Failure 400 {object} models.Error
@@ -168,6 +172,7 @@ func (h *Handler) GetReservationsByUserId(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param reservation body resirvation.Order true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
@@ -195,6 +200,7 @@ func (h *Handler) OrderMeal(c *gin.Context) {
 // @Tags resirvation
 // @Accept json
 // @Produce json
+// @Security ApiKeyAuth
 // @Param reservation body resirvation.Payment true "Rezervatsiya so'rovi"
 // @Success 200 {object} resirvation.Status
 // @Failure 400 {object} models.Error
