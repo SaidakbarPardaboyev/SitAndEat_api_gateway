@@ -7,3 +7,5 @@ time=2024-07-12T18:41:37.788+05:00 level=ERROR msg="MealCreate request error: rp
 time=2024-07-12T18:44:34.440+05:00 level=ERROR msg="MealCreate request error: rpc error: code = Unimplemented desc = unknown service menuRedis.Menu"
 time=2024-07-12T18:56:01.114+05:00 level=ERROR msg="MealCreate request error: rpc error: code = Unimplemented desc = unknown service menuRedis.Menu"
 time=2024-07-12T18:57:52.367+05:00 level=ERROR msg="MealCreate request error: rpc error: code = Unimplemented desc = unknown service menuRedis.Menu"
+time=2024-07-12T19:48:17.223+05:00 level=ERROR msg="DeleteReservation request error %v: " !BADKEY="rpc error: code = Unknown desc = dial tcp: address localhost::5432: too many colons in address"
+time=2024-07-12T19:48:57.838+05:00 level=ERROR msg="DeleteReservation request error %v: " !BADKEY="rpc error: code = Unknown desc = pq: password authentication failed for user \"postgres\""
