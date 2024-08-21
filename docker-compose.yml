@@ -1,0 +1,13 @@
+services:
+
+  api-service:
+    build: .
+    container_name: api-service
+    ports:
+      - "4444:4444"
+    networks:
+      - restaurant
+
+networks:
+  restaurant:
+    external: true
